@@ -1,0 +1,99 @@
+{% extends 'portal/base.html' %}
+{% block title %}Meu Perfil{% endblock %}
+
+{% block content %}
+<div class="portal-body" style="padding: 0; margin: 0;">
+
+  <!-- COLUNA ESQUERDA -->
+  <div class="coluna coluna-esquerda">
+
+    <!-- Bloco 1: Username + Avatar -->
+    <div class="bloco" style="text-align: center; min-height: 400px;">
+      <h3 style="color: #00aaff; margin-bottom: 15px;">{{ request.user.username }}</h3>
+      {% if request.user.perfil.avatar_url %}
+        <img src="{{ request.user.perfil.avatar_url }}" alt="Avatar" class="avatar">
+      {% else %}
+        <p style="color: #777;">Avatar não cadastrado</p>
+      {% endif %}
+    </div>
+
+    <!-- Bloco 2: Futuro -->
+    <div class="bloco" style="min-height: 200px;">
+      <p style="text-align: center; color: #777;">Bloco reservado</p>
+    </div>
+
+  </div>
+
+  <!-- COLUNA CENTRAL (Dados do perfil e assinatura) -->
+  <div class="coluna coluna-centro">
+
+    <!-- Bloco 3: Dados do Perfil -->
+    <div class="bloco" style="min-height: 400px;">
+      <h3 style="color: #00aaff; margin-top: 0; margin-bottom: 20px; text-align: center;">Dados do Perfil</h3>
+
+      <div class="form-group">
+        <p><strong>Nome Completo:</strong> {{ request.user.perfil.nome_completo|default:"Não informado" }}</p>
+      </div>
+
+      {% if request.user.perfil.data_nascimento %}
+      <div class="form-group">
+        <p><strong>Data de nascimento:</strong> {{ request.user.perfil.data_nascimento }}</p>
+      </div>
+      {% endif %}
+
+      <div class="form-group">
+        <p><strong>E-mail:</strong> {{ request.user.email|default_if_none:"Não informado" }}</p>
+      </div>
+
+      {% if request.user.perfil.telefone %}
+        <div class="form-group">
+          <p><strong>Telefone:</strong> {{ request.user.perfil.telefone }}</p>
+        </div>
+      {% endif %}
+
+      {% if request.user.perfil.redes_sociais %}
+        <div class="form-group">
+          <label>Redes Sociais:</label>
+          <p>{{ request.user.perfil.redes_sociais }}</p>
+        </div>
+      {% endif %}
+
+    <!-- Botão Editar Perfil -->
+    <div style="text-align: center; margin-top: 20px;">
+      <a href="{% url 'editar_perfil' %}" class="btn-padronizado">Editar Perfil</a>
+    </div>
+
+    </div>
+
+    <!-- Bloco 4: Assinatura -->
+    <div class="bloco" style="text-align: center;">
+      <h3 style="color: #00aaff; margin-top: 0;">Assinatura</h3>
+      {% if request.user.perfil.assinatura_url %}
+        <img src="{{ request.user.perfil.assinatura_url }}" alt="Assinatura" style="width: 100%; max-width: 400px; height: auto; border-radius: 12px;">
+      {% else %}
+        <p style="color: #777;">Assinatura não cadastrada</p>
+      {% endif %}
+    </div>
+
+    <!-- Botão Editar Perfil -->
+    <div style="text-align: center; margin-top: 20px;">
+      <a href="{% url 'editar_perfil' %}" class="btn-padronizado">Editar Perfil</a>
+    </div>
+
+  </div>
+
+  <!-- COLUNA DIREITA -->
+  <div class="coluna coluna-direita">
+    <!-- Aqui você pode adicionar blocos como menu, estatísticas, aniversariantes, etc. -->
+    <div class="bloco" style="min-height: 400px;">
+      <p style="text-align: center; color: #777;">Bloco adicional</p>
+    </div>
+
+    <div class="bloco" style="min-height: 200px;">
+      <p style="text-align: center; color: #777;">Bloco vazio reservado</p>
+    </div>
+
+  </div>
+
+</div>
+{% endblock %}

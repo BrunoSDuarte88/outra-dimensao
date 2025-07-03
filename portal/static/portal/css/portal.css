@@ -1,0 +1,477 @@
+/* Box sizing global para facilitar largura/padding */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0a0a0a 100%);
+    color: #ffffff;
+}
+
+/*body {*/
+/*  background: linear-gradient(135deg,*/
+/*    #e6e8ea 0%,    !* prata claro *!*/
+/*    #c3c6c8 25%,   !* prata médio *!*/
+/*    #f0f1f2 50%,   !* brilho *!*/
+/*    #c3c6c8 75%,   !* prata médio *!*/
+/*    #e6e8ea 100%); !* prata claro *!*/
+/*  background-size: 400% 400%;*/
+/*  animation: shine 8s ease-in-out infinite;*/
+/*  color: #333;*/
+/*  margin: 0;*/
+/*  font-family: Arial, sans-serif;*/
+/*}*/
+
+.banner img {
+    width: 100%;
+    max-height: 150px;
+    object-fit: cover;
+    display: block;
+    border-radius: 12px; /* borda arredondada do banner */
+    box-shadow: 0 0 10px #007acc;
+}
+
+/* Container */
+.container {
+    width: 100%;
+    padding: 0 20px;
+    margin: 0 auto;
+}
+
+/* Menu superior */
+.top-menu {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 30px;
+    background: linear-gradient(145deg, #121212, #1a1a1a);
+    border-radius: 12px;
+    padding: 0 10px;
+    margin: 10px 0; /* Espaço de 10px em cima e embaixo */
+    box-shadow: 0 0 10px #007acc;
+    /*box-shadow:*/ /*Sombra preta */
+    /*    0 4px 6px rgba(0, 0, 0, 0.9),*/
+    /*    inset 0 1px 0 rgba(255, 255, 255, 0.15),*/
+    /*    inset 0 -1px 4px rgba(255, 255, 255, 0.05);*/
+}
+
+.top-menu .menu-left {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+
+.top-menu .menu-left li {
+    margin-right: 30px;
+}
+
+.top-menu .menu-left a {
+    color: #bbb;
+    font-weight: 600;
+    text-decoration: none;
+    font-size: 16px;
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+.top-menu .menu-left a:hover {
+    color: #00aaff;
+    text-shadow: 0 0 10px #00aaff;
+}
+
+.top-menu .menu-right input[type="text"] {
+    padding: 3px 10px;
+    border-radius: 20px;
+    border: none;
+    outline: none;
+    font-size: 14px;
+    width: 180px;
+    background: #222;
+    color: #eee;
+    box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.7);
+    transition: background 0.3s ease;
+}
+
+.top-menu .menu-right input[type="text"]::placeholder {
+    color: #777;
+}
+
+.top-menu .menu-right input[type="text"]:focus {
+    background: #111;
+    box-shadow: 0 0 12px #00aaff;
+    color: #fff;
+}
+
+/* Corpo do portal */
+.portal-body {
+    display: flex;
+    gap: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+/* Colunas */
+.coluna-esquerda,
+.coluna-direita {
+    flex: 0 0 calc((100% - 40px) / 5); /* ~20% */
+}
+
+.coluna-centro {
+    flex: 0 0 calc((100% - 40px) * 3 / 5); /* ~60% */
+}
+
+.coluna {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Espaço entre blocos */
+}
+
+/* Blocos */
+.bloco {
+    background: linear-gradient(145deg, #121212, #1a1a1a);
+    border: 1px solid #02679f;
+    border-radius: 10px;
+    padding: 10px;
+    box-shadow: 0 0 10px #007acc;
+    color: #bbb;
+}
+
+.avatar {
+    display: block;           /* faz a imagem ser um bloco */
+    margin: 0 auto 10px auto; /* topo 0, lateral auto (centraliza), base 10px */
+    width: 150px;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 10px;    /* Mesmo valor de arredondamento dos blocos */
+    overflow: hidden;
+    box-shadow: 0 0 10px #007acc;
+    /* border: 2px solid #007acc;  removido o contorno azul */
+}
+
+/* Slides */
+.slides {
+    display: flex;
+    overflow: hidden;
+    width: 100%;
+    height: 150px;
+}
+
+.slides img {
+    width: 100%;
+    flex-shrink: 0;
+    transition: transform 1s ease-in-out;
+    object-fit: cover;
+}
+
+/* Rodapé */
+.rodape {
+    background-color: #111;
+    text-align: center;
+    padding: 10px 20px;
+    color: #ccc;
+    width: 100%;
+    box-sizing: border-box;
+    border-radius: 12px; /* borda arredondada */
+    margin: 10px 0 10px 0;
+    box-shadow: 0 0 10px #007acc;
+}
+
+.admin { color: red; }
+.mod { color: green; }
+.user { color: blue; }
+
+/* Animação brilho */
+@keyframes shine {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Links dentro dos blocos com mesmo estilo da barra de menu */
+.bloco a {
+  color: #bbb;
+  text-decoration: none;
+}
+
+.bloco a:hover {
+  color: #00aaff;
+  text-shadow: 0 0 8px #00aaff;
+}
+
+/* Estilo para o formulário de login no bloco */
+.login-bloco form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* ALTERAÇÃO PARA COR DE FUNDO E TEXTO IGUAL AO FORMULÁRIO DE CADASTRO */
+.login-bloco input[type="text"],
+.login-bloco input[type="password"] {
+  padding: 8px 12px;
+  border: 1px solid #02679f;
+  border-radius: 12px;
+  font-size: 14px;
+  outline: none;
+
+  background-color: white;
+  color: black;
+
+  box-shadow: inset 0 0 8px rgba(0,0,0,0.7);
+  transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.login-bloco input[type="text"]::placeholder,
+.login-bloco input[type="password"]::placeholder {
+  color: #777;
+}
+
+.login-bloco input[type="text"]:focus,
+.login-bloco input[type="password"]:focus {
+  background-color: #111;
+  color: white;
+
+  border-color: #3399ff;
+  box-shadow: 0 0 12px #3399ff;
+}
+
+.btn-login {
+  background: #00aaff;
+  color: white;
+  font-weight: 600;
+  border: none;
+  border-radius: 12px;
+  padding: 10px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  box-shadow:
+    0 0 10px #00aaff,
+    inset 0 0 8px #008ecc;
+}
+
+.btn-login:hover {
+  background: #008ecc;
+  box-shadow:
+    0 0 12px #00ccff,
+    inset 0 0 12px #00ccff;
+}
+
+.login-bloco p {
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+.login-bloco a.link-externo {
+  color: #00aaff;
+  text-decoration: none;
+  transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+.login-bloco a.link-externo:hover {
+  color: #00ccff;
+  text-shadow: 0 0 8px #00ccff;
+}
+
+/* Inputs padronizados (bordas arredondadas, cor fundo, etc) */
+.input-padronizado {
+    width: 100%;
+    padding: 10px;
+    border-radius: 12px;
+    border: 1px solid #02679f;
+    background-color: #222;
+    color: #eee;
+    box-shadow: inset 0 0 8px rgba(0,0,0,0.7);
+    font-size: 14px;
+    margin-bottom: 12px;
+    outline: none;
+    transition: background 0.3s ease;
+}
+
+.input-padronizado:focus {
+    background-color: #111;
+    box-shadow: 0 0 12px #00aaff;
+    color: #fff;
+}
+
+/* Botões padronizados */
+.btn-padronizado {
+    background: #00aaff;
+    color: white;
+    font-weight: 600;
+    border: none;
+    border-radius: 12px;
+    padding: 12px 20px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    box-shadow:
+        0 0 10px #00aaff,
+        inset 0 0 8px #008ecc;
+}
+
+.btn-padronizado:hover {
+    background: #008ecc;
+    box-shadow:
+        0 0 12px #00ccff,
+        inset 0 0 12px #00ccff;
+}
+
+/* Links com sombra ao passar o mouse */
+a {
+    color: #bbb;
+    text-decoration: none;
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+a:hover {
+    color: #00aaff;
+    text-shadow: 0 0 8px #00aaff;
+}
+
+/* ----------- ESTILO DO FORMULÁRIO DE CADASTRO ----------- */
+
+.cadastro-container {
+    max-width: 600px;
+    margin: 60px auto;
+    background-color: #1a1a1a; /* fundo escuro como o portal */
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0, 128, 255, 0.5);
+    color: white;
+}
+
+.cadastro-container label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: white;
+}
+
+.input-padronizado {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    background-color: white;
+    color: #000;
+    font-size: 14px;
+}
+
+.input-padronizado:focus {
+    outline: none;
+    border-color: #3399ff;
+    box-shadow: 0 0 5px #3399ff;
+}
+
+.btn-padronizado {
+    background-color: #0066cc;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.btn-padronizado:hover {
+    background-color: #0052a3;
+    box-shadow: 0 0 10px #3399ff;
+}
+
+.link-like-button {
+  all: unset;               /* remove estilo padrão de botão */
+  cursor: pointer;
+  color: #bbb;              /* cor igual ao link padrão */
+  text-decoration: none;    /* sem sublinhado por padrão */
+  font: inherit;            /* mesma fonte dos links */
+  transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+.link-like-button:hover,
+.link-like-button:focus {
+  color: #00aaff;           /* azul claro igual aos links */
+  text-shadow: 0 0 8px #00aaff;
+  outline: none;            /* pode remover ou personalizar */
+  text-decoration: underline;
+}
+
+.mensagens {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 15px;
+}
+
+.mensagens li {
+  padding: 10px;
+  border-radius: 8px;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.mensagens li.success {
+  background-color: #006600cc;
+  color: #e0ffe0;
+}
+
+.mensagens li.error {
+  background-color: #990000cc;
+  color: #ffd0d0;
+}
+
+.mensagem-erro {
+  font-size: 16px;
+  color: red;
+  font-weight: bold;
+  text-align: center;
+}
+
+.centralizado {
+    text-align: center;
+}
+
+.centralizado a {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.carrossel-container {
+    position: relative;
+    width: 600px;
+    height: 400px;
+    overflow: hidden;
+    background-color: #000; /* Moldura escura */
+    border: 2px solid #444; /* Moldura ao redor */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto; /* Centraliza o carrossel dentro do bloco */
+}
+
+.carrossel-slide {
+    position: absolute;
+    max-width: 100%;
+    max-height: 85%;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+    object-fit: contain;
+}
+
+.carrossel-slide.ativo {
+    opacity: 1;
+    z-index: 1;
+    display: block;
+    margin: 0 auto; /* Garante centralização se a imagem não for 100% */
+}
+
+.carrossel-legenda-area {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.carrossel-legenda-area a {
+    font-size: 16px; /* Aumenta a fonte */
+    font-weight: bold;   /* aplica o negrito */
+}

@@ -1,0 +1,17 @@
+{% extends 'portal/base.html' %}
+
+{% block title %}Cadastro realizado{% endblock %}
+
+{% block content %}
+<div class="bloco-centralizado">
+  <h2>Cadastro realizado com sucesso!</h2>
+  <p>Você será redirecionado para o seu perfil em alguns segundos...</p>
+</div>
+
+<script>
+// Redireciona para a página de perfil após 3 segundos (3000 ms)
+setTimeout(function() {
+  window.location.href = "{% url 'perfil' %}";
+}, 3000);
+</script>
+{% endblock %}

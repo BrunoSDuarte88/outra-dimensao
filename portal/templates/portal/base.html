@@ -1,0 +1,45 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <meta charset="UTF-8" />
+    <title>Outra Dimensão - {% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'portal/css/portal.css' %}" />
+</head>
+<body>
+    <div class="container">
+        <!-- Banner (igual para todas as páginas) -->
+        <div class="banner">
+            <img src="https://i.imgur.com/gNjsAbI.png" alt="Banner do Portal" />
+        </div>
+
+        <!-- Menu superior (igual para todas as páginas) -->
+        <nav class="top-menu">
+            <ul class="menu-left">
+                <li><a href="{% url 'portal' %}">Portal</a></li>
+                <li><a href="#">Fórum</a></li>
+                <li><a href="#">Regras</a></li>
+                <li><a href="#">Contato</a></li>
+            </ul>
+            <div class="menu-right">
+                <input type="text" placeholder="Buscar..." />
+            </div>
+        </nav>
+
+        <!-- Conteúdo específico de cada página -->
+        <main>
+            {% block content %}
+            {% endblock %}
+        </main>
+
+        <!-- Rodapé -->
+        <div class="rodape">
+            <p>Usuários online: 5 (3 registrados, 2 visitantes)</p>
+            <p>Grupos: <span class="admin">Admin</span> <span class="mod">Mod</span> <span class="user">Usuário</span></p>
+        </div>
+    </div>
+
+    <script src="{% static 'portal/js/carrossel.js' %}"></script>
+</body>
+</html>

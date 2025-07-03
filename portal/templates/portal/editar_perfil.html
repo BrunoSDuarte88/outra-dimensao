@@ -1,0 +1,77 @@
+{% extends 'portal/base.html' %}
+{% block content %}
+
+<div class="cadastro-container">
+    <h2>Editar Perfil</h2>
+
+    <!-- Mensagens -->
+    {% if messages %}
+        <ul class="mensagens">
+            {% for message in messages %}
+                <li class="{{ message.tags }}">{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    <form method="post">
+        {% csrf_token %}
+
+        <!-- Campos do formulário -->
+        <div class="form-group">
+            {{ form.username.label_tag }}<br>
+            {{ form.username }}
+        </div>
+
+        <div class="form-group">
+            {{ form.nome_completo.label_tag }}<br>
+            {{ form.nome_completo }}
+        </div>
+
+        <div class="form-group">
+            {{ form.email.label_tag }}<br>
+            {{ form.email }}
+        </div>
+
+        <div class="form-group">
+            {{ form.telefone.label_tag }}<br>
+            {{ form.telefone }}
+        </div>
+
+        <div class="form-group">
+            {{ form.redes_sociais.label_tag }}<br>
+            {{ form.redes_sociais }}
+        </div>
+
+        <div class="form-group">
+            {{ form.avatar_url.label_tag }}<br>
+            {{ form.avatar_url }}
+        </div>
+
+        <div class="form-group">
+            {{ form.assinatura_url.label_tag }}<br>
+            {{ form.assinatura_url }}
+        </div>
+
+        <hr>
+
+        <!-- Alteração de senha -->
+        <div class="form-group">
+            <label for="id_senha_atual">Senha Atual</label><br>
+            <input type="password" name="senha_atual" id="id_senha_atual" class="input-padronizado" placeholder="Digite sua senha atual">
+        </div>
+
+        <div class="form-group">
+            <label for="id_nova_senha">Nova Senha</label><br>
+            <input type="password" name="nova_senha" id="id_nova_senha" class="input-padronizado" placeholder="Digite a nova senha">
+        </div>
+
+        <div class="form-group">
+            <label for="id_nova_senha_confirm">Confirme a Nova Senha</label><br>
+            <input type="password" name="nova_senha_confirm" id="id_nova_senha_confirm" class="input-padronizado" placeholder="Confirme a nova senha">
+        </div>
+
+        <button type="submit" class="btn-padronizado">Salvar alterações</button>
+    </form>
+</div>
+
+{% endblock %}
