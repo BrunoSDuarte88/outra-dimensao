@@ -34,5 +34,11 @@ class Perfil(models.Model):
     avatar_url = models.URLField(blank=True)
     assinatura_url = models.URLField(blank=True)
 
+    TEMA_CHOICES = [
+        ('claro', 'Claro'),
+        ('escuro', 'Escuro'),
+    ]
+    tema = models.CharField(max_length=10, choices=TEMA_CHOICES, default='escuro')
+
     def __str__(self):
         return f"Perfil de {self.user.username}"

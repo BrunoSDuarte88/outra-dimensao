@@ -114,3 +114,12 @@ def editar_perfil_view(request):
         form = EditarPerfilForm(user=user)
 
     return render(request, 'portal/editar_perfil.html', {'form': form})
+
+def atualizar_tema_view(request):
+    if request.method == 'POST':
+        novo_tema = request.POST.get('tema')
+        if novo_tema in ['claro', 'escuro']:
+            perfil = request.user.perfil
+            perfil.tema = novo_tema
+            perfil.save()
+    return redirect('perfil')  # redireciona de volta à página do perfil

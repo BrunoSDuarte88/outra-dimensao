@@ -4,152 +4,183 @@
 <head>
     <meta charset="UTF-8">
     <title>Outra Dimensão</title>
+
+    <!-- Estilo principal -->
     <link rel="stylesheet" href="{% static 'portal/css/portal.css' %}">
 </head>
-<body>
-  <div class="container">
-    <!-- Banner -->
-    <div class="banner">
-        <img src="https://i.imgur.com/fpnsQEe.png" alt="Banner do Portal">
-    </div>
+{% comment %}<body>{% endcomment %}
+{% comment %}<body class="tema-{{ user.perfil.tema|default:'escuro' }}">{% endcomment %}
+<body class="{% if user.is_authenticated and user.perfil %}tema-{{ user.perfil.tema }}{% else %}tema-escuro{% endif %}">
 
-    <!-- Menu superior -->
-    <nav class="top-menu">
-        <ul class="menu-left">
-            <li><a href="#">Portal</a></li>
-            <li><a href="#">Fórum</a></li>
-            <li><a href="#">Regras</a></li>
-            <li><a href="#">Contato</a></li>
-        </ul>
-        <div class="menu-right">
-            <input type="text" placeholder="Buscar...">
+    <div class="container">
+
+        <!-- BANNER DO PORTAL -->
+        <div class="banner">
+            <img src="https://i.imgur.com/fpnsQEe.png" alt="Banner do Portal">
         </div>
-    </nav>
 
-    <!-- Corpo dividido em 3 colunas -->
-    <div class="portal-body">
-        <!-- Coluna esquerda -->
-        <div class="coluna coluna-esquerda">
+        <!-- MENU SUPERIOR -->
+        <nav class="top-menu">
+            <ul class="menu-left">
+                <li><a href="#">Portal</a></li>
+                <li><a href="#">Fórum</a></li>
+                <li><a href="#">Regras</a></li>
+                <li><a href="#">Contato</a></li>
+            </ul>
+            <div class="menu-right">
+                <input type="text" placeholder="Buscar...">
 
-            {% if user.is_authenticated %}
-            <!-- Bloco usuário logado -->
-            <div class="bloco" style="min-height: 400px;">
-                <h3 style="text-align: center;">{{ user.username }}</h3>
-                <img src="{{ user.perfil.avatar_url|default:'https://i.imgur.com/avatarPadrao.jpg' }}" alt="Avatar" class="avatar">
-                <p>Posts: 123</p>
-                <p>Desde: 01/01/2024</p>
-                <div><a href="{% url 'perfil' %}">Ver Perfil</a></div>
-                <div><a href="{% url 'editar_perfil' %}">Editar Perfil</a></div>
-                <form method="post" action="{% url 'logout' %}" style="display:inline;">
-                  {% csrf_token %}
-                  <button type="submit" class="link-like-button">Sair</button>
-                </form>
             </div>
-            {% else %}
-            <!-- Bloco login para usuário não logado -->
-            <div class="bloco login-bloco">
-                <h3>Login</h3>
+        </nav>
 
-                {% if messages %}
-                  {% for message in messages %}
-                    <div class="mensagem-erro">{{ message }}</div>
-                  {% endfor %}
+        <!-- CORPO PRINCIPAL DIVIDIDO EM 3 COLUNAS -->
+        <div class="portal-body">
+
+            <!-- COLUNA ESQUERDA -->
+            <div class="coluna coluna-esquerda">
+
+                {% if user.is_authenticated %}
+                <!-- BLOCO DE PERFIL PARA USUÁRIO LOGADO -->
+                <div class="bloco" style="min-height: 400px;">
+                    <h3 style="text-align: center;">{{ user.username }}</h3>
+                    <img src="{{ user.perfil.avatar_url|default:'https://i.imgur.com/avatarPadrao.jpg' }}" alt="Avatar" class="avatar">
+                    <p>Posts: 123</p>
+                    <p>Desde: 01/01/2024</p>
+                    <div><a href="{% url 'perfil' %}">Ver Perfil</a></div>
+                    <div><a href="{% url 'editar_perfil' %}">Editar Perfil</a></div>
+
+                    <form method="post" action="{% url 'logout' %}" style="display:inline;">
+                        {% csrf_token %}
+                        <button type="submit" class="link-like-button">Sair</button>
+                    </form>
+                </div>
+                {% else %}
+                <!-- BLOCO DE LOGIN PARA VISITANTES -->
+                <div class="bloco login-bloco">
+                    <h3>Login</h3>
+
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="mensagem-erro">{{ message }}</div>
+                        {% endfor %}
+                    {% endif %}
+
+                    <form method="post" action="{% url 'login' %}">
+                        {% csrf_token %}
+                        <input type="text" name="username" placeholder="Usuário" required>
+                        <input type="password" name="password" placeholder="Senha" required autocomplete="new-password">
+                        <button type="submit" class="btn-login">Entrar</button>
+                    </form>
+
+                    <p class="centralizado">
+                        <a href="/cadastro" class="link-externo">Registrar-se</a> |
+                        <a href="/esqueci-senha" class="link-externo">Esqueci a senha</a>
+                    </p>
+                </div>
                 {% endif %}
 
-                <form method="post" action="{% url 'login' %}">
-                    {% csrf_token %}
-                    <input type="text" name="username" placeholder="Usuário" required>
-                    <input type="password" name="password" placeholder="Senha" required autocomplete="new-password">
-                    <button type="submit" class="btn-login">Entrar</button>
-                </form>
+                <!-- BLOCO DE GRUPOS -->
+                <div class="bloco">
+                    <h3>Grupos</h3>
+                    <ul>
+                        <li><a href="#">Administradores</a></li>
+                        <li><a href="#">Moderadores</a></li>
+                        <li><a href="#">Membros</a></li>
+                    </ul>
+                </div>
 
-                <p class="centralizado">
-                    <a href="/cadastro" class="link-externo">Registrar-se</a> |
-                    <a href="/esqueci-senha" class="link-externo">Esqueci a senha</a>
-                </p>
-            </div>
-            {% endif %}
-
-            <div class="bloco">
-                <h3>Grupos</h3>
-                <ul>
-                    <li><a href="#">Administradores</a></li>
-                    <li><a href="#">Moderadores</a></li>
-                    <li><a href="#">Membros</a></li>
-                </ul>
-            </div>
-            <div class="bloco">
-                <h3>Amigos</h3>
-                <p>Online: Fulano, Ciclano</p>
-                <p>Offline: Beltrano</p>
-            </div>
-        </div>
-
-        <!-- Coluna central -->
-        <div class="coluna coluna-centro">
-            <div class="bloco">
-                <h2 style="text-align: center;">Bem-vindo à Outra Dimensão!</h2>
-                <p>Aqui você encontra tudo sobre o universo da Outra Dimensão.</p>
+                <!-- BLOCO DE AMIGOS -->
+                <div class="bloco">
+                    <h3>Amigos</h3>
+                    <p>Online: Fulano, Ciclano</p>
+                    <p>Offline: Beltrano</p>
+                </div>
             </div>
 
-            <div class="bloco carrossel">
+            <!-- COLUNA CENTRAL -->
+            <div class="coluna coluna-centro">
 
-    <h2 style="text-align: center;">Releases Oficiais</h2>
-       <!-- Área apenas com imagens -->
-    <div class="carrossel-container" id="carrossel1">
-        <img class="carrossel-slide ativo" src="https://i.imgur.com/xb2OLmg.png" alt="Release 1" data-link="https://link1.com" data-legenda="Confira o lançamento oficial!">
-        <img class="carrossel-slide" src="https://i.imgur.com/slide2.jpg" alt="Release 2" data-link="https://link2.com" data-legenda="Nova atualização disponível">
-        <img class="carrossel-slide" src="https://i.imgur.com/slide3.jpg" alt="Release 3" data-link="https://link3.com" data-legenda="Trailer revelado: assista agora">
-    </div>
+                <!-- BLOCO DE BOAS-VINDAS -->
+                <div class="bloco">
+                    <h2 style="text-align: center;">Bem-vindo à Outra Dimensão!</h2>
+                    <p>Aqui você encontra tudo sobre o universo da Outra Dimensão.</p>
+                </div>
 
-    <!-- Área separada e fixa abaixo -->
-    <div class="carrossel-legenda-area">
-        <a href="#" target="_blank" id="carrossel-legenda" class="carrossel-legenda">Confira o lançamento oficial!</a>
-    </div>
-</div>
+                <!-- BLOCO DO CARROSSEL PRINCIPAL (OFICIAL) -->
+                <div class="bloco carrossel">
+                    <h2 style="text-align: center;">Releases Oficiais</h2>
 
+                    <!-- ÁREA DE SLIDES (somente imagens) -->
+                    <div class="carrossel-container" id="carrossel1">
+                        <img class="carrossel-slide ativo" src="https://i.imgur.com/xb2OLmg.png" alt="Release 1" data-link="https://link1.com" data-legenda="Confira o lançamento oficial!">
+                        <img class="carrossel-slide" src="https://i.imgur.com/slide2.jpg" alt="Release 2" data-link="https://link2.com" data-legenda="Nova atualização disponível">
+                        <img class="carrossel-slide" src="https://i.imgur.com/slide3.jpg" alt="Release 3" data-link="https://link3.com" data-legenda="Trailer revelado: assista agora">
+                    </div>
 
-            <div class="bloco carrossel">
-                <h3>Releases dos Usuários</h3>
-                <div class="slides" id="slides2">
-                    <img src="https://i.imgur.com/slide4.jpg" alt="Release A">
-                    <img src="https://i.imgur.com/slide5.jpg" alt="Release B">
-                    <img src="https://i.imgur.com/slide6.jpg" alt="Release C">
+                    <!-- LEGENDA FIXA ABAIXO DO CARROSSEL -->
+                    <div class="carrossel-legenda-area">
+                        <a href="#" target="_blank" id="carrossel-legenda" class="carrossel-legenda">
+                            Confira o lançamento oficial!
+                        </a>
+                    </div>
+                </div>
+
+                <!-- BLOCO DE RELEASES DOS USUÁRIOS -->
+                <div class="bloco carrossel">
+                    <h3>Releases dos Usuários</h3>
+                    <div class="slides" id="slides2">
+                        <img src="https://i.imgur.com/slide4.jpg" alt="Release A">
+                        <img src="https://i.imgur.com/slide5.jpg" alt="Release B">
+                        <img src="https://i.imgur.com/slide6.jpg" alt="Release C">
+                    </div>
+                </div>
+            </div>
+
+            <!-- COLUNA DIREITA -->
+            <div class="coluna coluna-direita">
+
+                <!-- BLOCO DE MENU -->
+                <div class="bloco">
+                    <h3>Menu</h3>
+                    <ul>
+                        <li><a href="#">Painel do Usuário</a></li>
+                        <li><a href="#">Mensagens</a></li>
+                        <li><a href="#">Editar Perfil</a></li>
+                        <li><a href="#">Sair</a></li>
+                    </ul>
+                </div>
+
+                <!-- BLOCO DE ESTATÍSTICAS -->
+                <div class="bloco">
+                    <h3>Estatísticas</h3>
+                    <p>Membros: 1200</p>
+                    <p>Posts: 34500</p>
+                    <p>Último membro: <strong>Dimensional</strong></p>
+                </div>
+
+                <!-- BLOCO DE ANIVERSARIANTES -->
+                <div class="bloco">
+                    <h3>Aniversariantes</h3>
+                    <p>Hoje: Nenhum</p>
                 </div>
             </div>
         </div>
 
-        <!-- Coluna direita -->
-        <div class="coluna coluna-direita">
-            <div class="bloco">
-                <h3>Menu</h3>
-                <ul>
-                    <li><a href="#">Painel do Usuário</a></li>
-                    <li><a href="#">Mensagens</a></li>
-                    <li><a href="#">Editar Perfil</a></li>
-                    <li><a href="#">Sair</a></li>
-                </ul>
-            </div>
-            <div class="bloco">
-                <h3>Estatísticas</h3>
-                <p>Membros: 1200</p>
-                <p>Posts: 34500</p>
-                <p>Último membro: <strong>Dimensional</strong></p>
-            </div>
-            <div class="bloco">
-                <h3>Aniversariantes</h3>
-                <p>Hoje: Nenhum</p>
-            </div>
+        <!-- RODAPÉ -->
+        <div class="rodape">
+            <p>Usuários online: 5 (3 registrados, 2 visitantes)</p>
+            <p>Grupos:
+                <span class="admin">Admin</span>
+                <span class="mod">Mod</span>
+                <span class="user">Usuário</span>
+            </p>
         </div>
     </div>
 
-    <!-- Rodapé -->
-    <div class="rodape">
-        <p>Usuários online: 5 (3 registrados, 2 visitantes)</p>
-        <p>Grupos: <span class="admin">Admin</span> <span class="mod">Mod</span> <span class="user">Usuário</span></p>
-    </div>
-  </div>
-
+    <!-- SCRIPT DO CARROSSEL -->
+    <!-- SCRIPT DO CARROSSEL -->
 <script src="{% static 'portal/js/carrossel.js' %}"></script>
+
 </body>
 </html>
+

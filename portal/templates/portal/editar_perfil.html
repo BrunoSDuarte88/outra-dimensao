@@ -4,7 +4,7 @@
 <div class="cadastro-container">
     <h2>Editar Perfil</h2>
 
-    <!-- Mensagens -->
+    <!-- Mensagens gerais -->
     {% if messages %}
         <ul class="mensagens">
             {% for message in messages %}
@@ -16,58 +16,116 @@
     <form method="post">
         {% csrf_token %}
 
-        <!-- Campos do formulário -->
+        <!-- Username -->
         <div class="form-group">
             {{ form.username.label_tag }}<br>
-            {{ form.username }}
+            {% if form.username.errors %}
+                <p class="mensagem-erro">{{ form.username.errors.0 }}</p>
+            {% endif %}
+            <input type="text" name="username" id="id_username"
+                   class="input-padronizado {% if form.username.errors %}erro-campo{% endif %}"
+                   value="{{ form.username.value }}">
         </div>
 
+        <!-- Nome completo -->
         <div class="form-group">
             {{ form.nome_completo.label_tag }}<br>
-            {{ form.nome_completo }}
+            {% if form.nome_completo.errors %}
+                <p class="mensagem-erro">{{ form.nome_completo.errors.0 }}</p>
+            {% endif %}
+            <input type="text" name="nome_completo" id="id_nome_completo"
+                   class="input-padronizado {% if form.nome_completo.errors %}erro-campo{% endif %}"
+                   value="{{ form.nome_completo.value }}">
         </div>
 
+        <!-- Email -->
         <div class="form-group">
             {{ form.email.label_tag }}<br>
-            {{ form.email }}
+            {% if form.email.errors %}
+                <p class="mensagem-erro">{{ form.email.errors.0 }}</p>
+            {% endif %}
+            <input type="email" name="email" id="id_email"
+                   class="input-padronizado {% if form.email.errors %}erro-campo{% endif %}"
+                   value="{{ form.email.value }}">
         </div>
 
+        <!-- Telefone -->
         <div class="form-group">
             {{ form.telefone.label_tag }}<br>
-            {{ form.telefone }}
+            {% if form.telefone.errors %}
+                <p class="mensagem-erro">{{ form.telefone.errors.0 }}</p>
+            {% endif %}
+            <input type="text" name="telefone" id="id_telefone"
+                   class="input-padronizado {% if form.telefone.errors %}erro-campo{% endif %}"
+                   value="{{ form.telefone.value }}">
         </div>
 
+        <!-- Redes sociais -->
         <div class="form-group">
             {{ form.redes_sociais.label_tag }}<br>
-            {{ form.redes_sociais }}
+            {% if form.redes_sociais.errors %}
+                <p class="mensagem-erro">{{ form.redes_sociais.errors.0 }}</p>
+            {% endif %}
+            <input type="text" name="redes_sociais" id="id_redes_sociais"
+                   class="input-padronizado {% if form.redes_sociais.errors %}erro-campo{% endif %}"
+                   value="{{ form.redes_sociais.value }}">
         </div>
 
+        <!-- Avatar URL -->
         <div class="form-group">
             {{ form.avatar_url.label_tag }}<br>
-            {{ form.avatar_url }}
+            {% if form.avatar_url.errors %}
+                <p class="mensagem-erro">{{ form.avatar_url.errors.0 }}</p>
+            {% endif %}
+            <input type="url" name="avatar_url" id="id_avatar_url"
+                   class="input-padronizado {% if form.avatar_url.errors %}erro-campo{% endif %}"
+                   value="{{ form.avatar_url.value }}">
         </div>
 
+        <!-- Assinatura URL -->
         <div class="form-group">
             {{ form.assinatura_url.label_tag }}<br>
-            {{ form.assinatura_url }}
+            {% if form.assinatura_url.errors %}
+                <p class="mensagem-erro">{{ form.assinatura_url.errors.0 }}</p>
+            {% endif %}
+            <input type="url" name="assinatura_url" id="id_assinatura_url"
+                   class="input-padronizado {% if form.assinatura_url.errors %}erro-campo{% endif %}"
+                   value="{{ form.assinatura_url.value }}">
         </div>
 
         <hr>
 
-        <!-- Alteração de senha -->
+        <!-- Senha Atual -->
         <div class="form-group">
             <label for="id_senha_atual">Senha Atual</label><br>
-            <input type="password" name="senha_atual" id="id_senha_atual" class="input-padronizado" placeholder="Digite sua senha atual">
+            {% if senha_atual_erro %}
+                <p class="mensagem-erro">{{ senha_atual_erro }}</p>
+            {% endif %}
+            <input type="password" name="senha_atual" id="id_senha_atual"
+                   class="input-padronizado {% if senha_atual_erro %}erro-campo{% endif %}"
+                   placeholder="Digite sua senha atual">
         </div>
 
+        <!-- Nova Senha -->
         <div class="form-group">
             <label for="id_nova_senha">Nova Senha</label><br>
-            <input type="password" name="nova_senha" id="id_nova_senha" class="input-padronizado" placeholder="Digite a nova senha">
+            {% if nova_senha_erro %}
+                <p class="mensagem-erro">{{ nova_senha_erro }}</p>
+            {% endif %}
+            <input type="password" name="nova_senha" id="id_nova_senha"
+                   class="input-padronizado {% if nova_senha_erro %}erro-campo{% endif %}"
+                   placeholder="Digite a nova senha">
         </div>
 
+        <!-- Confirmar Nova Senha -->
         <div class="form-group">
             <label for="id_nova_senha_confirm">Confirme a Nova Senha</label><br>
-            <input type="password" name="nova_senha_confirm" id="id_nova_senha_confirm" class="input-padronizado" placeholder="Confirme a nova senha">
+            {% if nova_senha_confirm_erro %}
+                <p class="mensagem-erro">{{ nova_senha_confirm_erro }}</p>
+            {% endif %}
+            <input type="password" name="nova_senha_confirm" id="id_nova_senha_confirm"
+                   class="input-padronizado {% if nova_senha_confirm_erro %}erro-campo{% endif %}"
+                   placeholder="Confirme a nova senha">
         </div>
 
         <button type="submit" class="btn-padronizado">Salvar alterações</button>

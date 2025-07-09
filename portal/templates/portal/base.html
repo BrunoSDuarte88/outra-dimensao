@@ -2,19 +2,27 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
+    <!-- ReCAPTCHA para formulários -->
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
+    <!-- Metadados -->
     <meta charset="UTF-8" />
     <title>Outra Dimensão - {% block title %}{% endblock %}</title>
+
+    <!-- Estilo principal do portal -->
     <link rel="stylesheet" href="{% static 'portal/css/portal.css' %}" />
 </head>
-<body>
+{% comment %}<body>{% endcomment %}
+<body class="{% if request.user.is_authenticated %}tema-{{ request.user.perfil.tema }}{% else %}tema-escuro{% endif %}">
+
     <div class="container">
-        <!-- Banner (igual para todas as páginas) -->
+
+        <!-- BANNER (aparece em todas as páginas) -->
         <div class="banner">
             <img src="https://i.imgur.com/gNjsAbI.png" alt="Banner do Portal" />
         </div>
 
-        <!-- Menu superior (igual para todas as páginas) -->
+        <!-- MENU SUPERIOR (fixo, comum em todas as páginas) -->
         <nav class="top-menu">
             <ul class="menu-left">
                 <li><a href="{% url 'portal' %}">Portal</a></li>
@@ -27,19 +35,26 @@
             </div>
         </nav>
 
-        <!-- Conteúdo específico de cada página -->
+        <!-- CONTEÚDO PRINCIPAL (definido pelas páginas que herdam este template) -->
         <main>
             {% block content %}
             {% endblock %}
         </main>
 
-        <!-- Rodapé -->
+        <!-- RODAPÉ COM INFORMAÇÕES -->
         <div class="rodape">
             <p>Usuários online: 5 (3 registrados, 2 visitantes)</p>
-            <p>Grupos: <span class="admin">Admin</span> <span class="mod">Mod</span> <span class="user">Usuário</span></p>
+            <p>
+                Grupos:
+                <span class="admin">Admin</span>
+                <span class="mod">Mod</span>
+                <span class="user">Usuário</span>
+            </p>
         </div>
+
     </div>
 
+    <!-- Scripts adicionais (carrossel de imagens, etc.) -->
     <script src="{% static 'portal/js/carrossel.js' %}"></script>
 </body>
 </html>

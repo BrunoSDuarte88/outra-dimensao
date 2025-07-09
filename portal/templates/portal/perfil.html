@@ -29,8 +29,7 @@
 
     <!-- Bloco 3: Dados do Perfil -->
     <div class="bloco" style="min-height: 400px;">
-      <h3 style="color: #00aaff; margin-top: 0; margin-bottom: 20px; text-align: center;">Dados do Perfil</h3>
-
+      <h3 class="titulo-bloco">Dados do Perfil</h3>
       <div class="form-group">
         <p><strong>Nome Completo:</strong> {{ request.user.perfil.nome_completo|default:"Não informado" }}</p>
       </div>
@@ -67,17 +66,12 @@
 
     <!-- Bloco 4: Assinatura -->
     <div class="bloco" style="text-align: center;">
-      <h3 style="color: #00aaff; margin-top: 0;">Assinatura</h3>
+      <h3 class="titulo-bloco">Assinatura</h3>
       {% if request.user.perfil.assinatura_url %}
         <img src="{{ request.user.perfil.assinatura_url }}" alt="Assinatura" style="width: 100%; max-width: 400px; height: auto; border-radius: 12px;">
       {% else %}
         <p style="color: #777;">Assinatura não cadastrada</p>
       {% endif %}
-    </div>
-
-    <!-- Botão Editar Perfil -->
-    <div style="text-align: center; margin-top: 20px;">
-      <a href="{% url 'editar_perfil' %}" class="btn-padronizado">Editar Perfil</a>
     </div>
 
   </div>
@@ -86,7 +80,16 @@
   <div class="coluna coluna-direita">
     <!-- Aqui você pode adicionar blocos como menu, estatísticas, aniversariantes, etc. -->
     <div class="bloco" style="min-height: 400px;">
-      <p style="text-align: center; color: #777;">Bloco adicional</p>
+      <h3 class="titulo-bloco">Configuração</h3>
+      <form method="post" action="{% url 'atualizar_tema' %}" style="display: flex; flex-direction: column; align-items: center;">
+        {% csrf_token %}
+        <label for="tema" style="margin-bottom: 10px;">Tema do site:</label>
+        <select name="tema" id="tema" class="input-padronizado" style="margin-bottom: 15px; width: 80%;">
+          <option value="escuro" {% if request.user.perfil.tema == "escuro" %}selected{% endif %}>Escuro</option>
+          <option value="claro" {% if request.user.perfil.tema == "claro" %}selected{% endif %}>Claro</option>
+        </select>
+        <button type="submit" class="btn-padronizado" style="width: 60%;">Salvar</button>
+      </form>
     </div>
 
     <div class="bloco" style="min-height: 200px;">
