@@ -150,7 +150,8 @@ body {
 =================================================== */
 .carrossel-container {
   position: relative;
-  width: 720px;
+  width: 100%;
+  max-width: 720px;
   height: 400px;
   overflow: hidden;
   background-color: #000;
@@ -425,6 +426,11 @@ body {
     flex: 1 1 100%;
   }
 
+  .coluna {
+  width: 95%;
+  margin: 0 auto;
+}
+
   .banner img {
     max-height: none;
     height: auto;
@@ -439,6 +445,7 @@ body {
   .top-menu .menu-left {
     flex-direction: column;
     gap: 8px;
+    align-items: center;
   }
 
   .top-menu .menu-right {
@@ -456,6 +463,11 @@ body {
   .bloco {
     width: 95%;
     margin: 0 auto;
+  }
+
+  .carrossel-container {
+  height: auto;
+  padding: 10px;
   }
 
   .carrossel-slide {
@@ -477,6 +489,13 @@ body {
     font-size: 16px;
     padding: 14px;
   }
+
+  body {
+  padding: 0;
+  margin: 0;
+  overflow-x: hidden;
+  }
+
 }
 
 /* ===================================================
