@@ -562,34 +562,6 @@ body.tema-claro .rodape {
 
 @media (max-width: 768px) {
 
-  .topo {
-    padding: 5px;
-  }
 
-  .topo img {
-    width: 100%;
-    max-width: 100%;
-    height: auto;
-    display: block;
-    margin: 0 auto;
-  }
 
-  .top-menu {
-    flex-direction: column;
-    height: auto;
-    padding: 10px;
-    gap: 10px;
-  }
-  .top-menu .menu-left {
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-  .top-menu .menu-left li {
-    margin-right: 15px;
-    margin-bottom: 8px;
-  }
-  .top-menu .menu-right input[type="text"] {
-    width: 100%;
-    max-width: 100%;
-  }
 }
