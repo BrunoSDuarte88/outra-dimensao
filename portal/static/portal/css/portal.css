@@ -561,6 +561,19 @@ body.tema-claro .rodape {
 ============================================================================================= */
 
 @media (max-width: 768px) {
+
+  .topo {
+    padding: 5px;
+  }
+
+  .topo img {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+  }
+
   .top-menu {
     flex-direction: column;
     height: auto;
