@@ -25,6 +25,10 @@ body {
   display: block;
   border-radius: 12px;
   box-shadow: 0 0 10px #007acc;
+
+  height: auto;
+  max-width: 100%;
+
 }
 
 /* ===================================================
@@ -414,159 +418,6 @@ body {
 }
 
 /* ===================================================
-   RESPONSIVIDADE PARA CELULARES ATÉ 768px
-=================================================== */
-@media (max-width: 768px) {
-
-  /* Reset geral para evitar scroll lateral e margem indesejada */
-  html, body {
-    width: 100%;
-    min-height: 100vh;
-    box-sizing: border-box;
-    padding: 0;
-    margin: 0;
-    overflow-x: hidden;
-    -webkit-text-size-adjust: 100%; /* evita zoom estranho em iOS */
-  }
-
-  /* Layout vertical das colunas */
-  .portal-body {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    padding: 0 10px;
-  }
-
-  /* Cada coluna ocupa 100% da largura, com margem automática para centralizar */
-  .coluna-esquerda,
-  .coluna-centro,
-  .coluna-direita {
-    flex: 1 1 100%;
-    max-width: 100%;
-    margin: 0 auto;
-    box-sizing: border-box;
-  }
-
-  /* Ajuste interno das colunas */
-  .coluna {
-    width: 100%;
-    margin: 0 auto;
-    box-sizing: border-box;
-  }
-
-  /* Banner responsivo */
-  .banner img {
-    width: 100%;
-    height: auto;
-    display: block;
-    margin: 0 auto;
-    border-radius: 12px;
-    object-fit: cover;
-  }
-
-  /* Menu superior empilhado e centralizado */
-  .top-menu {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    padding: 10px;
-    height: auto;
-  }
-
-  /* Menus esquerdo e direito alinhados e flexíveis */
-  .top-menu .menu-left,
-  .top-menu .menu-right {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 10px;
-  }
-
-  /* Input busca ocupa quase toda largura */
-  .top-menu .menu-right input[type="text"] {
-    max-width: 100%;
-    width: 90%;
-    box-sizing: border-box;
-    font-size: 16px;
-  }
-
-  /* Blocos principais com margem e largura ajustadas */
-  .bloco {
-    width: 95%;
-    margin: 0 auto;
-    box-sizing: border-box;
-  }
-
-  /* Carrossel com altura automática e padding confortável */
-  .carrossel-container {
-    width: 100%;
-    height: auto;
-    padding: 10px;
-    box-sizing: border-box;
-  }
-
-  /* Imagens do carrossel com tamanho limitado */
-  .carrossel-slide {
-    max-height: 250px;
-    max-width: 100%;
-    object-fit: contain;
-  }
-
-  /* Legenda do carrossel com fonte menor */
-  .carrossel-legenda-area {
-    font-size: 14px;
-    padding: 5px;
-  }
-
-  /* Formulário de cadastro com padding e margens confortáveis */
-  .cadastro-container {
-    width: 95%;
-    max-width: 600px;
-    padding: 15px;
-    margin: 20px auto;
-    box-sizing: border-box;
-  }
-
-  /* Inputs e botões maiores e mais legíveis */
-  .input-padronizado,
-  .btn-padronizado {
-    font-size: 16px;
-    padding: 14px;
-  }
-
-  /* Rodapé ocupa 100% com padding e texto centralizado */
-  .rodape {
-    width: 100%;
-    text-align: center;
-    padding: 15px 10px;
-    font-size: 14px;
-    box-sizing: border-box;
-  }
-
-  /* Container genérico com padding lateral para evitar toque nos cantos da tela */
-  .container {
-    width: 100%;
-    padding: 0 10px;
-    margin: 0 auto;
-    box-sizing: border-box;
-  }
-
-  /* Imagens e vídeos dentro das colunas ficam responsivos */
-  .coluna img,
-  .coluna video {
-    max-width: 100%;
-    height: auto;
-    display: block;
-    margin: 0 auto;
-  }
-}
-
-
-/* ===================================================
    TEMA CLARO (ativa quando body.tema-claro)
 =================================================== */
 /*body.tema-claro {
@@ -703,4 +554,29 @@ body.tema-claro .rodape {
   color: #333;
   box-shadow: 0 0 10px #cc0000;
   border: 1px solid #cc0000;
+}
+
+/* ==========================================================================================
+   RESPONSIVIDADE PARA CELULARES ATÉ 768px
+============================================================================================= */
+
+@media (max-width: 768px) {
+  .top-menu {
+    flex-direction: column;
+    height: auto;
+    padding: 10px;
+    gap: 10px;
+  }
+  .top-menu .menu-left {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .top-menu .menu-left li {
+    margin-right: 15px;
+    margin-bottom: 8px;
+  }
+  .top-menu .menu-right input[type="text"] {
+    width: 100%;
+    max-width: 100%;
+  }
 }
