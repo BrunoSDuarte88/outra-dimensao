@@ -3,6 +3,7 @@ import certifi
 from pathlib import Path
 import logging
 from decouple import config
+import dj_database_url
 
 # Corrige certificado SSL no Windows (emails e requisições seguras)
 os.environ['SSL_CERT_FILE'] = certifi.where()
@@ -86,11 +87,17 @@ ROOT_URLCONF = 'outradimensao.urls'
 WSGI_APPLICATION = 'outradimensao.wsgi.application'
 
 # Banco de dados (SQLite)
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    'default': dj_database_url.config(
+        default=config('DATABASE_URL')
+    )
 }
 
 # Validação de senha
