@@ -9,6 +9,9 @@ from django.core.mail import send_mail
 from django.conf import settings
 import requests
 
+from django.http import HttpResponse
+from django.core.management import call_command
+
 User = get_user_model()
 
 def portal_view(request):
@@ -123,3 +126,7 @@ def atualizar_tema_view(request):
             perfil.tema = novo_tema
             perfil.save()
     return redirect('perfil')  # redireciona de volta à página do perfil
+
+def run_migrate(request):
+    call_command('migrate')
+    return HttpResponse("Migrações aplicadas com sucesso!")
