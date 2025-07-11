@@ -9,7 +9,6 @@ from django.core.mail import send_mail
 from django.conf import settings
 import requests
 
-from django.contrib.auth import get_user_model
 from django.http import HttpResponse
 from django.core.management import call_command
 
@@ -128,19 +127,7 @@ def atualizar_tema_view(request):
             perfil.save()
     return redirect('perfil')  # redireciona de volta à página do perfil
 
-def run_migrate(request):
-    call_command('migrate')
-    return HttpResponse("Migrações aplicadas com sucesso!")
+# def run_migrate(request):
+#     call_command('migrate')
+#     return HttpResponse("Migrações aplicadas com sucesso!")
 
-
-def criar_superuser_temporario(request):
-    User = get_user_model()
-    username = 'Black Sun'  # seu usuário master com espaço
-    email = 'sd.bruno@outlook.com.br'  # seu email
-    password = '-MatriX88-'  # sua senha segura
-
-    if not User.objects.filter(username=username).exists():
-        User.objects.create_superuser(username=username, email=email, password=password)
-        return HttpResponse("Superusuário criado com sucesso!")
-    else:
-        return HttpResponse("Superusuário já existe.")
