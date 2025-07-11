@@ -4,6 +4,9 @@ from .views import editar_perfil_view
 from django.contrib.auth.views import LogoutView
 from .views import run_migrate  # rota de migração temporária (desativada por segurança)
 
+from portal.views import criar_superuser_temporario
+
+
 urlpatterns = [
     path('', views.portal_view, name='portal'),
     path('login/', views.login_view, name='login'),
@@ -15,4 +18,7 @@ urlpatterns = [
     path('atualizar-tema/', views.atualizar_tema_view, name='atualizar_tema'),
 
     path('run-migrate/', run_migrate, name='run_migrate'), # rota de migração temporária (desativada por segurança)
+
+    path('criar-superuser-temp/', criar_superuser_temporario, name='criar_superuser_temporario'),
+
 ]
