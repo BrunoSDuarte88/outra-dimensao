@@ -292,11 +292,12 @@ body {
   margin-bottom: 15px;
 }
 
-.mensagens li.success {
-  background-color: #006600cc;
-  color: #e0ffe0;
-  padding: 10px;
-  border-radius: 8px;
+.mensagens li.success { /* Adicione esta nova regra */
+  background-color: transparent;
+  color: #00FF00;
+  font-size: 16px;
+  text-align: center;
+  margin: 0 0 10px;
   font-weight: bold;
 }
 
@@ -349,8 +350,14 @@ body {
   border: none;
   border-radius: 12px;
   padding: 12px 20px;
+  margin-top: 20px; /* ou outro valor que preferir */
   cursor: pointer;
   box-shadow: 0 0 10px #00aaff, inset 0 0 8px #008ecc;
+}
+
+.btn-centralizado {
+  display: block;
+  margin: 20px auto 0;
 }
 
 .btn-padronizado:hover {
@@ -554,5 +561,59 @@ body.tema-claro .rodape {
   color: #333;
   box-shadow: 0 0 10px #cc0000;
   border: 1px solid #cc0000;
+}
+
+
+.cadastro-container label {
+  display: block;
+  margin-top: 15px; /* Espaço acima da label */
+  margin-bottom: 5px; /* Espaço entre label e input */
+  font-weight: bold;
+}
+
+.cadastro-container input.input-padronizado {
+  display: block;
+  width: 100%;
+  margin-bottom: 5px; /* Espaço entre input e possível erro */
+}
+
+.cadastro-container div.error-msg {
+  margin-bottom: 10px; /* Espaço entre erro e próximo label */
+  color: red;
+}
+
+/* Tema escuro - padroniza <a.btn-padronizado> igual ao botão */
+
+/* Define tamanho da fonte e estilo igual ao botão */
+a.btn-padronizado {
+  font-size: 14px; /* mesmo que botão */
+  text-decoration: none;
+  color: white !important;
+  outline: none;
+  box-shadow: 0 0 10px #00aaff, inset 0 0 8px #008ecc;
+  background: #00aaff;
+  border-radius: 12px;
+  padding: 12px 20px;
+  display: inline-block;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  text-align: center;
+}
+
+/* Remove o efeito azul ao focar */
+a.btn-padronizado:focus {
+  outline: none;
+  color: white !important;
+  text-shadow: none;
+  box-shadow: 0 0 12px #00ccff, inset 0 0 12px #00ccff; /* mantém o glow azul suave */
+}
+
+/* Hover igual botão */
+a.btn-padronizado:hover {
+  background: #008ecc;
+  box-shadow: 0 0 12px #00ccff, inset 0 0 12px #00ccff;
+  color: white !important;
+  text-shadow: none;
 }
 

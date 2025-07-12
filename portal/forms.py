@@ -4,6 +4,7 @@ from portal.models import Perfil
 from django.core.exceptions import ValidationError
 from .validators import validar_username_com_espaco
 from django.contrib.auth.password_validation import validate_password
+import re
 
 def clean_password(self):
     password = self.cleaned_data.get('password')
@@ -194,15 +195,26 @@ class EditarPerfilForm(forms.Form):
         super().__init__(*args, **kwargs)
 
         perfil = getattr(self.user, 'perfil', None)
-        if perfil:
-            self.fields['nome_completo'].initial = perfil.nome_completo
-            self.fields['telefone'].initial = perfil.telefone
-            self.fields['redes_sociais'].initial = perfil.redes_sociais
-            self.fields['avatar_url'].initial = perfil.avatar_url
-            self.fields['assinatura_url'].initial = perfil.assinatura_url
 
-        self.fields['username'].initial = self.user.username
-        self.fields['email'].initial = self.user.email
+        self.fields['nome_completo'].initial = getattr(perfil, 'nome_completo', '') or ''
+
+        if perfil and perfil.telefone:
+            telefone = perfil.telefone
+            if len(telefone) == 13:  # Exemplo: 5511916845194
+                telefone_formatado = f'+{telefone[0:2]} ({telefone[2:4]}) {telefone[4:9]}-{telefone[9:]}'
+            elif len(telefone) == 12:  # Exemplo: 551198845678
+                telefone_formatado = f'+{telefone[0:2]} ({telefone[2:4]}) {telefone[4:8]}-{telefone[8:]}'
+            else:
+                telefone_formatado = telefone  # fallback
+            self.fields['telefone'].initial = telefone_formatado
+
+        # self.fields['telefone'].initial = getattr(perfil, 'telefone', '') or ''
+        self.fields['redes_sociais'].initial = getattr(perfil, 'redes_sociais', '') or ''
+        self.fields['avatar_url'].initial = getattr(perfil, 'avatar_url', '') or ''
+        self.fields['assinatura_url'].initial = getattr(perfil, 'assinatura_url', '') or ''
+
+        self.fields['username'].initial = self.user.username or ''
+        self.fields['email'].initial = self.user.email or ''
 
     def clean_username(self):
         username = self.cleaned_data['username']
@@ -212,15 +224,34 @@ class EditarPerfilForm(forms.Form):
 
     def clean_email(self):
         email = self.cleaned_data['email']
-        if User.objects.filter(email__iexact=email).exists():
-            raise ValidationError('Este e-mail já está em uso.')
+        # Busca usuários com esse email, excluindo o usuário atual
+        email_existe = User.objects.exclude(pk=self.user.pk).filter(email__iexact=email).exists()
+        if email_existe:
+            raise ValidationError('Este e-mail já está em uso por outro usuário.')
         return email
 
+    # def clean_email(self):
+    #     email = self.cleaned_data['email']
+    #     if User.objects.filter(email__iexact=email).exists():
+    #         raise ValidationError('Este e-mail já está em uso.')
+    #     return email
+
     def clean_telefone(self):
-        telefone = self.cleaned_data.get('telefone')
-        if telefone and Perfil.objects.exclude(user=self.user).filter(telefone=telefone).exists():
-            raise ValidationError('Este telefone já está em uso.')
-        return telefone
+        telefone = self.cleaned_data.get('telefone', '')
+        if telefone:
+            telefone_limpo = re.sub(r'\D', '', telefone)
+            if len(telefone_limpo) < 10 or len(telefone_limpo) > 13:
+                raise ValidationError('Telefone inválido. Informe número com DDD.')
+            if Perfil.objects.exclude(user=self.user).filter(telefone=telefone_limpo).exists():
+                raise ValidationError('Este telefone já está em uso.')
+            return telefone_limpo
+        return ''
+
+    # def clean_telefone(self):
+    #     telefone = self.cleaned_data.get('telefone')
+    #     if telefone and Perfil.objects.exclude(user=self.user).filter(telefone=telefone).exists():
+    #         raise ValidationError('Este telefone já está em uso.')
+    #     return telefone
 
     def save(self, commit=True):
         user = self.user

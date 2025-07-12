@@ -2,7 +2,7 @@
 {% block content %}
 
 <div class="cadastro-container">
-    <h2>Editar Perfil</h2>
+    <h2 style="text-align: center;">Editar Perfil</h2>
 
     <!-- Mensagens gerais -->
     {% if messages %}
@@ -55,9 +55,14 @@
             {% if form.telefone.errors %}
                 <p class="mensagem-erro">{{ form.telefone.errors.0 }}</p>
             {% endif %}
-            <input type="text" name="telefone" id="id_telefone"
-                   class="input-padronizado {% if form.telefone.errors %}erro-campo{% endif %}"
-                   value="{{ form.telefone.value }}">
+              <input type="text" name="telefone" id="id_telefone"
+                     class="input-padronizado {% if form.telefone.errors %}erro-campo{% endif %}"
+                     placeholder="+55 (11) 91234-5678"
+                     value="{{ form.telefone.value }}">
+
+{#            <input type="text" name="telefone" id="id_telefone"#}
+{#                   class="input-padronizado {% if form.telefone.errors %}erro-campo{% endif %}"#}
+{#                   value="{{ form.telefone.value }}">#}
         </div>
 
         <!-- Redes sociais -->
@@ -128,8 +133,42 @@
                    placeholder="Confirme a nova senha">
         </div>
 
-        <button type="submit" class="btn-padronizado">Salvar alterações</button>
+        <button type="submit" class="btn-padronizado btn-centralizado">Salvar alterações</button>
     </form>
 </div>
+
+
+<!-- InputMask para telefone -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.8/jquery.inputmask.min.js"></script>
+
+<script>
+  $(document).ready(function(){
+    $('#id_telefone').inputmask({
+      mask: '+[9{1,3}] (99) 99999-9999',
+      greedy: false,
+      placeholder: '_',
+      showMaskOnHover: false,
+      showMaskOnFocus: true,
+      clearIncomplete: true,
+      definitions: {
+        '9': {
+          validator: "[0-9]",
+          cardinality: 1
+        }
+      },
+      onBeforePaste: function (pastedValue, opts) {
+        return pastedValue.replace(/\D/g, '');
+      }
+    });
+
+    // Preenche automaticamente com +55 se o campo estiver vazio
+    const telInput = $('#id_telefone');
+    if (!telInput.val().trim()) {
+      telInput.val('+55 ');
+    }
+  });
+</script>
+
 
 {% endblock %}

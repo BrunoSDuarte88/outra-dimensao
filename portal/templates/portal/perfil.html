@@ -1,6 +1,8 @@
 {% extends 'portal/base.html' %}
 {% block title %}Meu Perfil{% endblock %}
 
+{% load format_extras %}
+
 {% block content %}
 <div class="portal-body" style="padding: 0; margin: 0;">
 
@@ -29,7 +31,17 @@
 
     <!-- Bloco 3: Dados do Perfil -->
     <div class="bloco" style="min-height: 400px;">
-      <h3 class="titulo-bloco">Dados do Perfil</h3>
+      <h2 style="text-align: center;">Dados do Perfil</h2>
+
+    <!-- EXIBE MENSAGENS DE SUCESSO OU ERRO -->
+{% if messages %}
+  <ul class="mensagens">
+    {% for message in messages %}
+      <li class="{{ message.tags }}">{{ message }}</li>
+    {% endfor %}
+  </ul>
+{% endif %}
+
       <div class="form-group">
         <p><strong>Nome Completo:</strong> {{ request.user.perfil.nome_completo|default:"Não informado" }}</p>
       </div>
@@ -46,7 +58,8 @@
 
       {% if request.user.perfil.telefone %}
         <div class="form-group">
-          <p><strong>Telefone:</strong> {{ request.user.perfil.telefone }}</p>
+          <p><strong>Telefone:</strong> {{ request.user.perfil.telefone|format_telefone }}</p>
+{#          <p><strong>Telefone:</strong> {{ request.user.perfil.telefone }}</p>#}
         </div>
       {% endif %}
 
@@ -66,7 +79,7 @@
 
     <!-- Bloco 4: Assinatura -->
     <div class="bloco" style="text-align: center;">
-      <h3 class="titulo-bloco">Assinatura</h3>
+      <h2 style="text-align: center;">Assinatura</h2>
       {% if request.user.perfil.assinatura_url %}
         <img src="{{ request.user.perfil.assinatura_url }}" alt="Assinatura" style="width: 100%; max-width: 400px; height: auto; border-radius: 12px;">
       {% else %}
@@ -80,7 +93,7 @@
   <div class="coluna coluna-direita">
     <!-- Aqui você pode adicionar blocos como menu, estatísticas, aniversariantes, etc. -->
     <div class="bloco" style="min-height: 400px;">
-      <h3 class="titulo-bloco">Configuração</h3>
+      <h2 style="text-align: center;">Configurações</h2>
       <form method="post" action="{% url 'atualizar_tema' %}" style="display: flex; flex-direction: column; align-items: center;">
         {% csrf_token %}
         <label for="tema" style="margin-bottom: 10px;">Tema do site:</label>
@@ -88,7 +101,7 @@
           <option value="escuro" {% if request.user.perfil.tema == "escuro" %}selected{% endif %}>Escuro</option>
           <option value="claro" {% if request.user.perfil.tema == "claro" %}selected{% endif %}>Claro</option>
         </select>
-        <button type="submit" class="btn-padronizado" style="width: 60%;">Salvar</button>
+        <button type="submit" class="btn-padronizado btn-centralizado" style="width: 50%;">Salvar</button>
       </form>
     </div>
 

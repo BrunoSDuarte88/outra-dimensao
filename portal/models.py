@@ -29,10 +29,10 @@ class Perfil(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='perfil')
     nome_completo = models.CharField(max_length=150)
     data_nascimento = models.DateField(null=True, blank=True)
-    telefone = models.CharField(max_length=20, blank=True)
-    redes_sociais = models.TextField(blank=True)
-    avatar_url = models.URLField(blank=True)
-    assinatura_url = models.URLField(blank=True)
+    telefone = models.CharField(max_length=20, blank=True, default='')
+    redes_sociais = models.TextField(blank=True, default='')
+    avatar_url = models.URLField(blank=True, default='')
+    assinatura_url = models.URLField(blank=True, default='')
 
     TEMA_CHOICES = [
         ('claro', 'Claro'),
@@ -42,3 +42,9 @@ class Perfil(models.Model):
 
     def __str__(self):
         return f"Perfil de {self.user.username}"
+
+    def save(self, *args, **kwargs):
+        if self.telefone:
+            # Remove qualquer caractere que não seja número
+            self.telefone = re.sub(r'\D', '', self.telefone)
+        super().save(*args, **kwargs)

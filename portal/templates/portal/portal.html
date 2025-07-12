@@ -26,6 +26,9 @@
         <!-- MENU SUPERIOR -->
         <nav class="top-menu">
             <ul class="menu-left">
+                {% if request.user.is_authenticated and request.user.is_superuser %}
+                    <li><a href="{% url 'acp' %}">Administração</a></li>
+                {% endif %}
                 <li><a href="#">Portal</a></li>
                 <li><a href="#">Fórum</a></li>
                 <li><a href="#">Regras</a></li>
@@ -73,7 +76,7 @@
                         {% csrf_token %}
                         <input type="text" name="username" placeholder="Usuário" required>
                         <input type="password" name="password" placeholder="Senha" required autocomplete="new-password">
-                        <button type="submit" class="btn-login">Entrar</button>
+                        <button class="btn-padronizado">Entrar</button>
                     </form>
 
                     <p class="centralizado">

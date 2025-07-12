@@ -9,6 +9,8 @@ from django.core.mail import send_mail
 from django.conf import settings
 import requests
 
+from django.contrib.auth.decorators import user_passes_test
+
 from django.http import HttpResponse
 from django.core.management import call_command
 
@@ -126,6 +128,26 @@ def atualizar_tema_view(request):
             perfil.tema = novo_tema
             perfil.save()
     return redirect('perfil')  # redireciona de volta à página do perfil
+
+@user_passes_test(lambda u: u.is_superuser)
+def acp_view(request):
+    return render(request, 'portal/acp.html')
+
+@user_passes_test(lambda u: u.is_superuser)
+def gerenciar_usuarios_view(request):
+    return render(request, 'portal/gerenciar_usuarios.html')
+@user_passes_test(lambda u: u.is_superuser)
+def gerenciar_grupos_view(request):
+    return render(request, 'portal/gerenciar_grupos.html')
+
+@user_passes_test(lambda u: u.is_superuser)
+def gerenciar_categorias_view(request):
+    return render(request, 'portal/gerenciar_categorias.html')
+
+@user_passes_test(lambda u: u.is_superuser)
+def gerenciar_posts_view(request):
+    return render(request, 'portal/gerenciar_posts.html')
+
 
 # def run_migrate(request):
 #     call_command('migrate')
