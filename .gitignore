@@ -11,3 +11,5 @@ db.sqlite3
 
 # Ignorar arquivo de variáveis de ambiente
 .env
+
+staticfiles/
