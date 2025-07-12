@@ -52,11 +52,23 @@ class CadastroForm(forms.Form):
         required=False,
         widget=forms.TextInput(attrs={'class': 'input-padronizado'})
     )
-    redes_sociais = forms.CharField(
-        label='Redes Sociais',
-        required=False,
-        widget=forms.TextInput(attrs={'class': 'input-padronizado'})
-    )
+
+    instagram = forms.URLField(label='Instagram', required=False,
+                               widget=forms.URLInput(attrs={'class': 'input-padronizado'}))
+    twitter = forms.URLField(label='Twitter', required=False,
+                             widget=forms.URLInput(attrs={'class': 'input-padronizado'}))
+    facebook = forms.URLField(label='Facebook', required=False,
+                              widget=forms.URLInput(attrs={'class': 'input-padronizado'}))
+    youtube = forms.URLField(label='YouTube', required=False,
+                             widget=forms.URLInput(attrs={'class': 'input-padronizado'}))
+    linkedin = forms.URLField(label='LinkedIn', required=False,
+                              widget=forms.URLInput(attrs={'class': 'input-padronizado'}))
+
+    # redes_sociais = forms.CharField(
+    #     label='Redes Sociais',
+    #     required=False,
+    #     widget=forms.TextInput(attrs={'class': 'input-padronizado'})
+    # )
     avatar_url = forms.URLField(
         label='Avatar (URL)',
         required=False,
@@ -118,7 +130,12 @@ class CadastroForm(forms.Form):
                 nome_completo=self.cleaned_data['nome_completo'],
                 data_nascimento=self.cleaned_data['data_nascimento'],
                 telefone=self.cleaned_data.get('telefone', ''),
-                redes_sociais=self.cleaned_data.get('redes_sociais', ''),
+                instagram=self.cleaned_data.get('instagram', ''),
+                twitter=self.cleaned_data.get('twitter', ''),
+                facebook=self.cleaned_data.get('facebook', ''),
+                youtube=self.cleaned_data.get('youtube', ''),
+                linkedin=self.cleaned_data.get('linkedin', ''),
+                # redes_sociais=self.cleaned_data.get('redes_sociais', ''),
                 avatar_url=self.cleaned_data.get('avatar_url', ''),
                 assinatura_url=self.cleaned_data.get('assinatura_url', '')
             )
@@ -127,7 +144,7 @@ class CadastroForm(forms.Form):
 class PerfilForm(forms.ModelForm):
     class Meta:
         model = Perfil
-        fields = ['nome_completo', 'data_nascimento', 'telefone', 'redes_sociais', 'avatar_url', 'assinatura_url']
+        fields = ['nome_completo', 'data_nascimento', 'telefone', 'avatar_url', 'assinatura_url']
         widgets = {
             'nome_completo': forms.TextInput(attrs={'class': 'input-padronizado'}),
             'data_nascimento': forms.DateInput(attrs={
@@ -135,10 +152,7 @@ class PerfilForm(forms.ModelForm):
                 'class': 'input-padronizado'
             }),
             'telefone': forms.TextInput(attrs={'class': 'input-padronizado'}),
-            'redes_sociais': forms.Textarea(attrs={
-                'rows': 3,
-                'class': 'input-padronizado'
-            }),
+
             'avatar_url': forms.URLInput(attrs={
                 'placeholder': 'URL da imagem do avatar',
                 'class': 'input-padronizado'
@@ -174,11 +188,23 @@ class EditarPerfilForm(forms.Form):
         required=False,
         widget=forms.TextInput(attrs={'class': 'input-padronizado'})
     )
-    redes_sociais = forms.CharField(
-        label='Redes Sociais',
-        required=False,
-        widget=forms.Textarea(attrs={'rows': 3, 'class': 'input-padronizado'})
-    )
+
+    instagram = forms.URLField(label='Instagram', required=False,
+                               widget=forms.URLInput(attrs={'class': 'input-padronizado'}))
+    twitter = forms.URLField(label='Twitter', required=False,
+                             widget=forms.URLInput(attrs={'class': 'input-padronizado'}))
+    facebook = forms.URLField(label='Facebook', required=False,
+                              widget=forms.URLInput(attrs={'class': 'input-padronizado'}))
+    youtube = forms.URLField(label='YouTube', required=False,
+                             widget=forms.URLInput(attrs={'class': 'input-padronizado'}))
+    linkedin = forms.URLField(label='LinkedIn', required=False,
+                              widget=forms.URLInput(attrs={'class': 'input-padronizado'}))
+
+    # redes_sociais = forms.CharField(
+    #     label='Redes Sociais',
+    #     required=False,
+    #     widget=forms.Textarea(attrs={'rows': 3, 'class': 'input-padronizado'})
+    # )
     avatar_url = forms.URLField(
         label='Avatar (URL)',
         required=False,
@@ -209,7 +235,14 @@ class EditarPerfilForm(forms.Form):
             self.fields['telefone'].initial = telefone_formatado
 
         # self.fields['telefone'].initial = getattr(perfil, 'telefone', '') or ''
-        self.fields['redes_sociais'].initial = getattr(perfil, 'redes_sociais', '') or ''
+
+        self.fields['instagram'].initial = getattr(perfil, 'instagram', '') or ''
+        self.fields['twitter'].initial = getattr(perfil, 'twitter', '') or ''
+        self.fields['facebook'].initial = getattr(perfil, 'facebook', '') or ''
+        self.fields['youtube'].initial = getattr(perfil, 'youtube', '') or ''
+        self.fields['linkedin'].initial = getattr(perfil, 'linkedin', '') or ''
+
+        # self.fields['redes_sociais'].initial = getattr(perfil, 'redes_sociais', '') or ''
         self.fields['avatar_url'].initial = getattr(perfil, 'avatar_url', '') or ''
         self.fields['assinatura_url'].initial = getattr(perfil, 'assinatura_url', '') or ''
 
@@ -263,7 +296,7 @@ class EditarPerfilForm(forms.Form):
         perfil, created = Perfil.objects.get_or_create(user=user)
         perfil.nome_completo = self.cleaned_data.get('nome_completo')
         perfil.telefone = self.cleaned_data.get('telefone')
-        perfil.redes_sociais = self.cleaned_data.get('redes_sociais')
+        # perfil.redes_sociais = self.cleaned_data.get('redes_sociais')
         perfil.avatar_url = self.cleaned_data.get('avatar_url')
         perfil.assinatura_url = self.cleaned_data.get('assinatura_url')
         if commit:

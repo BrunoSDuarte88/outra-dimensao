@@ -57,11 +57,36 @@
             <div style="color: red;">{{ form.password_confirm.errors.0 }}</div>
         {% endif %}
 
-        <label>Redes Sociais (Facebook, Instagram, etc):</label>
-        <input type="text" name="redes_sociais" value="{{ form.redes_sociais.value|default_if_none:'' }}" class="input-padronizado">
-        {% if form.redes_sociais.errors %}
-            <div style="color: red;">{{ form.redes_sociais.errors.0 }}</div>
-        {% endif %}
+        <label>Instagram:</label>
+<input type="url" name="instagram" value="{{ form.instagram.value|default_if_none:'' }}" class="input-padronizado">
+{% if form.instagram.errors %}
+    <div style="color: red;">{{ form.instagram.errors.0 }}</div>
+{% endif %}
+
+<label>Twitter:</label>
+<input type="url" name="twitter" value="{{ form.twitter.value|default_if_none:'' }}" class="input-padronizado">
+{% if form.twitter.errors %}
+    <div style="color: red;">{{ form.twitter.errors.0 }}</div>
+{% endif %}
+
+<label>Facebook:</label>
+<input type="url" name="facebook" value="{{ form.facebook.value|default_if_none:'' }}" class="input-padronizado">
+{% if form.facebook.errors %}
+    <div style="color: red;">{{ form.facebook.errors.0 }}</div>
+{% endif %}
+
+<label>YouTube:</label>
+<input type="url" name="youtube" value="{{ form.youtube.value|default_if_none:'' }}" class="input-padronizado">
+{% if form.youtube.errors %}
+    <div style="color: red;">{{ form.youtube.errors.0 }}</div>
+{% endif %}
+
+<label>LinkedIn:</label>
+<input type="url" name="linkedin" value="{{ form.linkedin.value|default_if_none:'' }}" class="input-padronizado">
+{% if form.linkedin.errors %}
+    <div style="color: red;">{{ form.linkedin.errors.0 }}</div>
+{% endif %}
+
 
         <label>Avatar (URL da imagem):</label>
         <input type="url" name="avatar_url" value="{{ form.avatar_url.value|default_if_none:'' }}" placeholder="https://example.com/avatar.jpg" class="input-padronizado">
@@ -77,7 +102,8 @@
 
         <div class="g-recaptcha" data-sitekey="6LeqaXMrAAAAAKpYCMnMxVE_mJXhZtXgbCRJ8nl5"></div>
 
-        <button type="submit" class="btn-padronizado">Cadastrar</button>
+        <button type="submit" class="btn-padronizado btn-centralizado" style="width: 50%;">Cadastrar</button>
+
     </form>
 </div>
 {% endblock %}

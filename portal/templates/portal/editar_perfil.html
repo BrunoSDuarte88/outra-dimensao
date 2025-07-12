@@ -66,15 +66,61 @@
         </div>
 
         <!-- Redes sociais -->
+        <!-- Instagram -->
         <div class="form-group">
-            {{ form.redes_sociais.label_tag }}<br>
-            {% if form.redes_sociais.errors %}
-                <p class="mensagem-erro">{{ form.redes_sociais.errors.0 }}</p>
+            {{ form.instagram.label_tag }}<br>
+            {% if form.instagram.errors %}
+                <p class="mensagem-erro">{{ form.instagram.errors.0 }}</p>
             {% endif %}
-            <input type="text" name="redes_sociais" id="id_redes_sociais"
-                   class="input-padronizado {% if form.redes_sociais.errors %}erro-campo{% endif %}"
-                   value="{{ form.redes_sociais.value }}">
+            <input type="url" name="instagram" id="id_instagram"
+                   class="input-padronizado {% if form.instagram.errors %}erro-campo{% endif %}"
+                   value="{{ form.instagram.value }}">
         </div>
+
+        <!-- Twitter -->
+        <div class="form-group">
+            {{ form.twitter.label_tag }}<br>
+            {% if form.twitter.errors %}
+                <p class="mensagem-erro">{{ form.twitter.errors.0 }}</p>
+            {% endif %}
+            <input type="url" name="twitter" id="id_twitter"
+                   class="input-padronizado {% if form.twitter.errors %}erro-campo{% endif %}"
+                   value="{{ form.twitter.value }}">
+        </div>
+
+        <!-- Facebook -->
+        <div class="form-group">
+            {{ form.facebook.label_tag }}<br>
+            {% if form.facebook.errors %}
+                <p class="mensagem-erro">{{ form.facebook.errors.0 }}</p>
+            {% endif %}
+            <input type="url" name="facebook" id="id_facebook"
+                   class="input-padronizado {% if form.facebook.errors %}erro-campo{% endif %}"
+                   value="{{ form.facebook.value }}">
+        </div>
+
+        <!-- YouTube -->
+        <div class="form-group">
+            {{ form.youtube.label_tag }}<br>
+            {% if form.youtube.errors %}
+                <p class="mensagem-erro">{{ form.youtube.errors.0 }}</p>
+            {% endif %}
+            <input type="url" name="youtube" id="id_youtube"
+                   class="input-padronizado {% if form.youtube.errors %}erro-campo{% endif %}"
+                   value="{{ form.youtube.value }}">
+        </div>
+
+        <!-- LinkedIn -->
+        <div class="form-group">
+            {{ form.linkedin.label_tag }}<br>
+            {% if form.linkedin.errors %}
+                <p class="mensagem-erro">{{ form.linkedin.errors.0 }}</p>
+            {% endif %}
+            <input type="url" name="linkedin" id="id_linkedin"
+                   class="input-padronizado {% if form.linkedin.errors %}erro-campo{% endif %}"
+                   value="{{ form.linkedin.value }}">
+        </div>
+
 
         <!-- Avatar URL -->
         <div class="form-group">

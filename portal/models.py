@@ -30,7 +30,14 @@ class Perfil(models.Model):
     nome_completo = models.CharField(max_length=150)
     data_nascimento = models.DateField(null=True, blank=True)
     telefone = models.CharField(max_length=20, blank=True, default='')
-    redes_sociais = models.TextField(blank=True, default='')
+
+    instagram = models.URLField(blank=True, default='')
+    twitter = models.URLField(blank=True, default='')
+    facebook = models.URLField(blank=True, default='')
+    youtube = models.URLField(blank=True, default='')
+    linkedin = models.URLField(blank=True, default='')
+
+    # redes_sociais = models.TextField(blank=True, default='')
     avatar_url = models.URLField(blank=True, default='')
     assinatura_url = models.URLField(blank=True, default='')
 
