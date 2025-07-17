@@ -26,8 +26,11 @@
         <!-- MENU SUPERIOR (fixo, comum em todas as páginas) -->
         <nav class="top-menu">
             <ul class="menu-left">
+                {% if request.user.is_authenticated and request.user.is_superuser %}
+                    <li><a href="{% url 'acp' %}">Administração</a></li>
+                {% endif %}
                 <li><a href="{% url 'portal' %}">Portal</a></li>
-                <li><a href="#">Fórum</a></li>
+                <li><a href="{% url 'forum:lista_categorias' %}">Fórum</a></li>
                 <li><a href="#">Regras</a></li>
                 <li><a href="#">Contato</a></li>
             </ul>

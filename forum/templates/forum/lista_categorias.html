@@ -1,0 +1,18 @@
+{% extends 'portal/base.html' %}
+
+{% block title %}Categorias do Fórum - Outra Dimensão{% endblock %}
+
+{% block content %}
+<h1>Categorias do Fórum</h1>
+
+<ul>
+  {% for categoria in categorias %}
+    <li>
+      <a href="{% url 'forum:lista_foruns' categoria.id %}">{{ categoria.nome }}</a><br />
+      <small>{{ categoria.descricao }}</small>
+    </li>
+  {% empty %}
+    <li>Não há categorias cadastradas.</li>
+  {% endfor %}
+</ul>
+{% endblock %}

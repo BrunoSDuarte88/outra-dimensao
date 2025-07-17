@@ -6,11 +6,6 @@ from .validators import validar_username_com_espaco
 from django.contrib.auth.password_validation import validate_password
 import re
 
-def clean_password(self):
-    password = self.cleaned_data.get('password')
-    validate_password(password)
-    return password
-
 
 User = get_user_model()
 
@@ -99,6 +94,11 @@ class CadastroForm(forms.Form):
             'class': 'input-padronizado'
         })
     )
+
+    def clean_password(self):
+        password = self.cleaned_data.get('password')
+        validate_password(password)
+        return password
 
     def clean_username(self):
         username = self.cleaned_data['username']

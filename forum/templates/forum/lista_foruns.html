@@ -1,0 +1,21 @@
+{% extends 'portal/base.html' %}
+
+{% block title %}Fóruns - {{ categoria.nome }} - Outra Dimensão{% endblock %}
+
+{% block content %}
+<h1>Fóruns da Categoria: {{ categoria.nome }}</h1>
+<p>{{ categoria.descricao }}</p>
+
+<ul>
+  {% for forum in foruns %}
+    <li>
+      <a href="{% url 'forum:lista_topicos' forum.id %}">{{ forum.nome }}</a><br />
+      <small>{{ forum.descricao }}</small>
+    </li>
+  {% empty %}
+    <li>Não há fóruns nessa categoria.</li>
+  {% endfor %}
+</ul>
+
+<a href="{% url 'forum:lista_categorias' %}">Voltar para Categorias</a>
+{% endblock %}

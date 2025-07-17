@@ -1,0 +1,25 @@
+{% extends 'portal/base.html' %}
+
+{% block title %}Tópico: {{ topico.titulo }} - Outra Dimensão{% endblock %}
+
+{% block content %}
+<h1>{{ topico.titulo }}</h1>
+<p>Fórum: <a href="{% url 'forum:lista_topicos' topico.forum.id %}">{{ topico.forum.nome }}</a></p>
+<p>Criado por {{ topico.autor.username }} em {{ topico.criado_em|date:"d/m/Y H:i" }}</p>
+
+<hr />
+
+<h2>Postagens</h2>
+<ul>
+  {% for postagem in postagens %}
+    <li>
+      <strong>{{ postagem.autor.username }}</strong> em {{ postagem.criado_em|date:"d/m/Y H:i" }}:<br />
+      <p>{{ postagem.conteudo|linebreaks }}</p>
+    </li>
+  {% empty %}
+    <li>Sem postagens ainda.</li>
+  {% endfor %}
+</ul>
+
+<a href="{% url 'forum:lista_topicos' topico.forum.id %}">Voltar para Tópicos</a>
+{% endblock %}

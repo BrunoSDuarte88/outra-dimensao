@@ -21,4 +21,5 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('portal.urls')),  # Redireciona raiz para o portal
+    path('forum/', include('forum.urls')),
 ]

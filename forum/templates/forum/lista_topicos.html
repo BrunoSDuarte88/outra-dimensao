@@ -1,0 +1,20 @@
+{% extends 'portal/base.html' %}
+
+{% block title %}Tópicos - {{ forum.nome }} - Outra Dimensão{% endblock %}
+
+{% block content %}
+<h1>Tópicos do Fórum: {{ forum.nome }}</h1>
+<p>{{ forum.descricao }}</p>
+
+<ul>
+  {% for topico in topicos %}
+    <li>
+      <a href="{% url 'forum:detalhe_topico' topico.id %}">{{ topico.titulo }}</a> - criado por {{ topico.autor.username }} em {{ topico.criado_em|date:"d/m/Y H:i" }}{% if topico.fechado %} (FECHADO){% endif %}
+    </li>
+  {% empty %}
+    <li>Não há tópicos nesse fórum.</li>
+  {% endfor %}
+</ul>
+
+<a href="{% url 'forum:lista_foruns' forum.categoria.id %}">Voltar para Fóruns</a>
+{% endblock %}
