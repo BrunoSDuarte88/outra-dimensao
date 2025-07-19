@@ -616,3 +616,78 @@ a.btn-padronizado:hover {
   color: white !important;
   text-shadow: none;
 }
+
+/* ===================================================
+   RESPONSIVIDADE PARA TELAS PEQUENAS (celulares e tablets)
+=================================================== */
+@media (max-width: 768px) {
+
+  .portal-body {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .coluna-esquerda,
+  .coluna-direita,
+  .coluna-centro {
+    flex: 1 1 100%;
+  }
+
+  .carrossel-container {
+    height: auto;
+    max-height: 300px;
+  }
+
+  .carrossel-slide {
+    max-height: 250px;
+  }
+
+  .top-menu {
+    flex-direction: column;
+    align-items: flex-start;
+    height: auto;
+    padding: 10px;
+  }
+
+  .top-menu .menu-left {
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+  }
+
+  .top-menu .menu-right {
+    width: 100%;
+    margin-top: 10px;
+  }
+
+  .top-menu .menu-right input[type="text"] {
+    width: 100%;
+  }
+
+  .banner img {
+    border-radius: 8px;
+    max-height: 120px;
+  }
+
+  .avatar {
+    width: 100px;
+    height: auto;
+  }
+
+  .cadastro-container {
+    width: 100%;
+    padding: 20px;
+    margin: 30px auto;
+  }
+
+  .btn-padronizado,
+  .btn-login {
+    width: 100%;
+  }
+
+  a.btn-padronizado {
+    width: 100%;
+    text-align: center;
+  }
+}
+
