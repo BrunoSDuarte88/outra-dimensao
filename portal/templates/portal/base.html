@@ -47,7 +47,11 @@
 
         <!-- RODAPÉ COM INFORMAÇÕES -->
         <div class="rodape">
-            <p>Usuários online: 5 (3 registrados, 2 visitantes)</p>
+            {% if total_online > 0 %}
+                <p>Usuários online: {{ total_online }} ({{ registrados_online }} registrados, {{ visitantes_online }} visitantes)</p>
+            {% else %}
+                <p>Nenhum usuário online no momento.</p>
+            {% endif %}
             <p>
                 Grupos:
                 <span class="admin">Admin</span>

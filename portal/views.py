@@ -8,16 +8,69 @@ from .forms import CadastroForm, PerfilForm, EditarPerfilForm
 from django.core.mail import send_mail
 from django.conf import settings
 import requests
+import datetime
 
 from django.contrib.auth.decorators import user_passes_test
 
 from django.http import HttpResponse
 from django.core.management import call_command
+from forum.models import Postagem
+from django.contrib.sessions.models import Session
+from django.utils import timezone
+
 
 User = get_user_model()
 
 def portal_view(request):
-    return render(request, 'portal/portal.html')
+    total_membros = User.objects.count()
+    total_posts = Postagem.objects.count()
+    online = contar_usuarios_online()
+    try:
+        ultimo_membro = User.objects.latest('date_joined')
+    except User.DoesNotExist:
+        ultimo_membro = None
+
+    hoje = datetime.date.today()
+    # Filtra perfis com aniversário hoje (mesmo dia e mês)
+    aniversariantes_hoje = Perfil.objects.filter(
+        data_nascimento__month=hoje.month,
+        data_nascimento__day=hoje.day
+    )
+
+    return render(request, 'portal/portal.html', {
+        'total_membros': total_membros,
+        'total_posts': total_posts,
+        'ultimo_membro': ultimo_membro,
+        'aniversariantes_hoje': aniversariantes_hoje,
+        'total_online': online['total_online'],
+        'registrados_online': online['registrados_online'],
+        'visitantes_online': online['visitantes_online'],
+    })
+    # return render(request, 'portal/portal.html')
+
+
+def contar_usuarios_online():
+    # Sessões não expiradas
+    sessoes_ativas = Session.objects.filter(expire_date__gte=timezone.now())
+
+    usuarios_online_ids = set()
+    visitantes_online = 0
+
+    for sessao in sessoes_ativas:
+        data = sessao.get_decoded()
+        user_id = data.get('_auth_user_id')
+        if user_id:
+            usuarios_online_ids.add(user_id)
+        else:
+            visitantes_online += 1
+
+    usuarios_online = User.objects.filter(id__in=usuarios_online_ids)
+
+    return {
+        'total_online': usuarios_online.count() + visitantes_online,
+        'registrados_online': usuarios_online.count(),
+        'visitantes_online': visitantes_online,
+    }
 
 def login_view(request):
     if request.method == 'POST':
