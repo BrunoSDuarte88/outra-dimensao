@@ -617,77 +617,49 @@ a.btn-padronizado:hover {
   text-shadow: none;
 }
 
-/* ===================================================
-   RESPONSIVIDADE PARA TELAS PEQUENAS (celulares e tablets)
-=================================================== */
+/* Responsivo para celular */
 @media (max-width: 768px) {
+    .perfil-amigos-container {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
 
-  .portal-body {
-    flex-direction: column;
-    gap: 20px;
-  }
+    .perfil-amigos-container .bloco {
+        flex: 1 1 45%; /* Fica lado a lado, 2 por linha, responsivo */
+        min-width: 140px;
+        max-width: 220px;
+    }
 
-  .coluna-esquerda,
-  .coluna-direita,
-  .coluna-centro {
-    flex: 1 1 100%;
-  }
+    .coluna-esquerda, .coluna-direita {
+        display: none; /* Opcional: esconde colunas laterais */
+    }
 
-  .carrossel-container {
-    height: auto;
-    max-height: 300px;
-  }
+    .coluna-centro {
+        width: 100%;
+        padding: 0 10px;
+    }
 
-  .carrossel-slide {
-    max-height: 250px;
-  }
+    .top-menu {
+        flex-direction: column;
+        align-items: center;
+    }
 
-  .top-menu {
-    flex-direction: column;
-    align-items: flex-start;
-    height: auto;
-    padding: 10px;
-  }
+    .top-menu ul {
+        flex-direction: column;
+        align-items: center;
+        gap: 5px;
+    }
 
-  .top-menu .menu-left {
-    flex-direction: column;
-    gap: 10px;
-    width: 100%;
-  }
+    .top-menu input[type="text"] {
+        width: 90%;
+        margin-top: 10px;
+    }
 
-  .top-menu .menu-right {
-    width: 100%;
-    margin-top: 10px;
-  }
-
-  .top-menu .menu-right input[type="text"] {
-    width: 100%;
-  }
-
-  .banner img {
-    border-radius: 8px;
-    max-height: 120px;
-  }
-
-  .avatar {
-    width: 100px;
-    height: auto;
-  }
-
-  .cadastro-container {
-    width: 100%;
-    padding: 20px;
-    margin: 30px auto;
-  }
-
-  .btn-padronizado,
-  .btn-login {
-    width: 100%;
-  }
-
-  a.btn-padronizado {
-    width: 100%;
-    text-align: center;
-  }
+    .banner img {
+        width: 100%;
+        height: auto;
+    }
 }
 
