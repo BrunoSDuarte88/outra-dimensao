@@ -37,5 +37,14 @@ class Postagem(models.Model):
     criado_em = models.DateTimeField(auto_now_add=True)
     atualizado_em = models.DateTimeField(auto_now=True)
 
+    curtidas = models.ManyToManyField(
+        settings.AUTH_USER_MODEL,
+        related_name='postagens_curtidas',
+        blank=True
+    )
+
     def __str__(self):
         return f"Post de {self.autor.username} em {self.topico.titulo}"
+
+    def total_curtidas(self):
+        return self.curtidas.count()

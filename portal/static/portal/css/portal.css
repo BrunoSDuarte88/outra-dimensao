@@ -617,49 +617,202 @@ a.btn-padronizado:hover {
   text-shadow: none;
 }
 
-/* Responsivo para celular */
-@media (max-width: 768px) {
-    .perfil-amigos-container {
-        display: flex;
-        gap: 10px;
-        flex-wrap: wrap;
-        justify-content: center;
-    }
 
-    .perfil-amigos-container .bloco {
-        flex: 1 1 45%; /* Fica lado a lado, 2 por linha, responsivo */
-        min-width: 140px;
-        max-width: 220px;
-    }
+<!--PAINEL-->
 
-    .coluna-esquerda, .coluna-direita {
-        display: none; /* Opcional: esconde colunas laterais */
-    }
+.acp-container {
+    padding: 30px 0;
+}
 
-    .coluna-centro {
-        width: 100%;
-        padding: 0 10px;
-    }
+.acp-frame {
+    background: linear-gradient(145deg, #121212, #1a1a1a);
+    border: 1px solid #02679f;
+    border-radius: 10px;
+    box-shadow: 0 0 10px #007acc;
+    padding: 40px;
+    width: 100%;
+    color: #fff;
+}
 
-    .top-menu {
-        flex-direction: column;
-        align-items: center;
-    }
+.acp-frame h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
 
-    .top-menu ul {
-        flex-direction: column;
-        align-items: center;
-        gap: 5px;
-    }
+.acp-frame ul {
+    list-style: none;
+    padding: 0;
+}
 
-    .top-menu input[type="text"] {
-        width: 90%;
-        margin-top: 10px;
-    }
+.acp-frame ul li {
+    margin: 10px 0;
+    font-size: 1.2rem;
+}
 
-    .banner img {
-        width: 100%;
-        height: auto;
-    }
+.acp-frame ul li a {
+    color: #66aaff;
+    text-decoration: none;
+}
+
+.acp-frame ul li a,
+.acp-sidebar a,
+.acp-main-panel a {
+    color: #ffffff;
+    text-decoration: none !important;
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 1.6;
+    display: block;
+}
+
+.acp-frame ul li a:hover,
+.acp-frame ul li a:focus,
+.acp-sidebar a:hover,
+.acp-sidebar a:focus,
+.acp-main-panel a:hover,
+.acp-main-panel a:focus {
+    color: #00aaff;
+    text-shadow: 0 0 8px #00aaff;
+    text-decoration: none !important;
+    outline: none;
+}
+
+.acp-tabs-internas {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #005eff;
+    padding-bottom: 10px;
+}
+
+.aba-btn {
+    background-color: transparent;
+    border: none;
+    color: #66aaff;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 8px 12px;
+    border-radius: 8px 8px 0 0;
+    transition: background-color 0.3s;
+}
+
+.aba-btn:hover {
+  color: #00aaff;
+  text-shadow: 0 0 10px #00aaff;
+  border-color: #00aaff; /* caso tenha borda */
+  box-shadow: 0 0 10px #00aaff; /* brilho externo opcional */
+}
+
+.aba-btn.active {
+    background: #008ecc;
+
+    color: #fff;
+}
+
+.aba-conteudo {
+    display: none;
+}
+
+.aba-conteudo.active {
+    display: block;
+}
+
+/* Layout interno da aba "Usuários" */
+.acp-geral-layout {
+    display: flex;
+    gap: 30px;
+}
+
+/* Menu lateral */
+.acp-sidebar {
+    width: 250px;
+    background: linear-gradient(145deg, #121212, #1a1a1a);
+    border-right: 1px solid #005eff;
+    padding: 20px;
+    border-radius: 10px;
+    color: #fff;
+}
+
+.acp-sidebar h3 {
+    margin-top: 20px;
+    margin-bottom: 0px;
+    padding-bottom: 5px;    /* aumenta o espaço entre texto e a linha */
+    font-size: 1.25rem;  /* ou o tamanho que usar no portal, ajuste se precisar */
+    color: #bbb;         /* mesmo tom cinza claro do portal */
+    font-weight: bold;   /* para deixar parecido com títulos */
+    border-bottom: 1px solid #005eff; /* LINHA AZUL ABAIXO DO TÍTULO */
+}
+
+.acp-sidebar ul {
+    margin-top: 0px; /* ou até 0px se quiser colado */
+    list-style: none;
+    padding-left: 0;
+}
+
+.acp-sidebar ul li {
+    margin-bottom: 10px;
+}
+
+.acp-sidebar ul li a {
+    color: #ffffff; /* branco normal */
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 14px; /* igual ao portal */
+    font-family: Arial, sans-serif; /* mesma fonte */
+    line-height: 1.6;
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+.acp-sidebar ul li a:hover,
+.acp-sidebar ul li a:focus {
+    color: #00aaff; /* azul claro no hover/focus */
+    text-shadow: 0 0 8px #00aaff;
+    outline: none;
+}
+
+/* Painel principal */
+.acp-main-panel {
+    flex: 1;
+    background-color: #1a1a1a;
+    border: 1px solid #005eff;
+    padding: 20px;
+    border-radius: 10px;
+    color: #fff;
+}
+
+.acp-main-panel h2 {
+    margin-bottom: 20px;
+}
+
+/* Tabela de usuários */
+.acp-stats-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.acp-stats-table th, .acp-stats-table td {
+    border: 1px solid #333;
+    padding: 10px;
+    text-align: left;
+}
+
+.acp-stats-table th {
+    background-color: #005eff;
+    color: white;
+}
+
+.acp-stats-table td button {
+    padding: 4px 8px;
+    margin-right: 5px;
+    background-color: #007acc;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.acp-stats-table td button:hover {
+    background-color: #005eff;
 }
 

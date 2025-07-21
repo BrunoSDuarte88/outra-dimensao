@@ -1,4 +1,5 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
+from django.contrib.auth.decorators import login_required
 from .models import Categoria, Forum, Topico, Postagem
 
 def lista_categorias(request):
@@ -23,3 +24,13 @@ def detalhe_topico(request, topico_id):
 def responder_topico(request, topico_id):
     # esqueleto — deixaremos para quando criarmos os formulários
     pass
+
+@login_required
+def curtir_post(request, post_id):
+    post = get_object_or_404(Postagem, id=post_id)
+    user = request.user
+    if user in post.curtidas.all():
+        post.curtidas.remove(user)  # Já curtiu, então descurte
+    else:
+        post.curtidas.add(user)     # Não curtiu ainda, adiciona curtida
+    return redirect(request.META.get('HTTP_REFERER', 'forum:index'))  # Volta para a página anterior ou index

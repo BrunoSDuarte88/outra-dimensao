@@ -55,3 +55,46 @@ class Perfil(models.Model):
             # Remove qualquer caractere que não seja número
             self.telefone = re.sub(r'\D', '', self.telefone)
         super().save(*args, **kwargs)
+
+from django.utils import timezone
+
+class FriendRequest(models.Model):
+    from_user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='sent_friend_requests', on_delete=models.CASCADE)
+    to_user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='received_friend_requests', on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        unique_together = ('from_user', 'to_user')
+        verbose_name = 'Solicitação de Amizade'
+        verbose_name_plural = 'Solicitações de Amizade'
+
+    def __str__(self):
+        return f"Solicitação de {self.from_user.username} para {self.to_user.username}"
+
+class Friendship(models.Model):
+    user1 = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='friendships_iniciadas', on_delete=models.CASCADE)
+    user2 = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='friendships_recebidas', on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        unique_together = ('user1', 'user2')
+        verbose_name = 'Amizade'
+        verbose_name_plural = 'Amizades'
+
+    def __str__(self):
+        return f"Amizade entre {self.user1.username} e {self.user2.username}"
+
+class Notification(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='notifications', on_delete=models.CASCADE)
+    message = models.CharField(max_length=255)
+    url = models.URLField(blank=True, null=True)  # Link para exibir detalhes
+    created_at = models.DateTimeField(auto_now_add=True)
+    is_read = models.BooleanField(default=False)
+
+    class Meta:
+        verbose_name = 'Notificação'
+        verbose_name_plural = 'Notificações'
+        ordering = ['-created_at']
+
+    def __str__(self):
+        return f"Notificação para {self.user.username}: {self.message}"

@@ -64,5 +64,20 @@
 
     <!-- Scripts adicionais (carrossel de imagens, etc.) -->
     <script src="{% static 'portal/js/carrossel.js' %}"></script>
+
+    <script>
+    function mostrarAba(id) {
+        const botoes = document.querySelectorAll('.aba-btn');
+        const conteudos = document.querySelectorAll('.aba-conteudo');
+
+        botoes.forEach(btn => btn.classList.remove('active'));
+        conteudos.forEach(div => div.classList.remove('active'));
+
+        document.querySelector(`#${id}`).classList.add('active');
+        event.target.classList.add('active');
+    }
+    </script>
+
+
 </body>
 </html>
