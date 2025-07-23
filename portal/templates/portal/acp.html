@@ -10,30 +10,47 @@
 
         <!-- Abas internas -->
         <div class="acp-tabs-internas">
-            <button class="aba-btn active" onclick="voltarParaGeral()">GERAL</button>
-            <button class="aba-btn" onclick="mostrarAba('grupos')">FÓRUNS</button>
-            <button class="aba-btn" onclick="mostrarAba('categorias')">POSTAGEM</button>
-            <button class="aba-btn" onclick="mostrarAba('posts')">USUÁRIOS E GRUPOS</button>
-            <button class="aba-btn" onclick="mostrarAba('posts')">PERMISSÕES</button>
-            <button class="aba-btn" onclick="mostrarAba('posts')">PERSONALIZAR</button>
-            <button class="aba-btn" onclick="mostrarAba('posts')">MANUTENÇÃO</button>
-            <button class="aba-btn" onclick="mostrarAba('posts')">SISTEMA</button>
-            <button class="aba-btn" onclick="mostrarAba('posts')">EXTENSÕES</button>
+            <button class="aba-btn active" onclick="resetarAbaGeral()">GERAL</button>
+            <button class="aba-btn" onclick="mostrarPainel('painel-foruns')">FÓRUNS</button>
+            <!--<button class="aba-btn" onclick="mostrarAba('painel-foruns')">FÓRUNS</button>-->
+            <button class="aba-btn" onclick="mostrarAba('painel-postagens')">POSTAGEM</button>
+            <button class="aba-btn" onclick="mostrarAba('painel-usuarios-grupos')">USUÁRIOS E GRUPOS</button>
+            <button class="aba-btn" onclick="mostrarAba('painel-permissoes')">PERMISSÕES</button>
+            <button class="aba-btn" onclick="mostrarAba('painel-personalizar')">PERSONALIZAR</button>
+            <button class="aba-btn" onclick="mostrarAba('painel-manutencao')">MANUTENÇÃO</button>
+            <button class="aba-btn" onclick="mostrarAba('painel-sistema')">SISTEMA</button>
+            <button class="aba-btn" onclick="mostrarAba('painel-extensoes')">EXTENSÕES</button>
         </div>
 
         <!-- Conteúdo da aba GERAL -->
         <div id="geral" class="aba-conteudo active">
             <div class="acp-geral-layout">
                 <!-- Menu lateral -->
-                <div class="acp-sidebar">
-                    <h3>Acesso rápido</h3>
-                    <ul>
-                        <li><a href="#" onclick="mostrarPainel('painel-usuarios')">Gerenciar usuários</a></li>
-                        <li><a href="#">Gerenciar grupos</a></li>
-                        <li><a href="#">Gerenciar fóruns</a></li>
-                        <li><a href="#">Registro do moderador</a></li>
-                    </ul>
-                </div>
+                    <div class="acp-sidebar">
+                        <h3>Acesso rápido</h3>
+
+                        <!-- Menu da aba GERAL (visível por padrão) -->
+                        <ul id="menu-geral" class="menu-lateral" style="display: block;">
+                            <li><a href="#" onclick="mostrarPainel('painel-usuarios')">Gerenciar usuários</a></li>
+                            <li><a href="#" onclick="mostrarPainel('painel-grupos')">Gerenciar grupos</a></li>
+                            <li><a href="#" onclick="mostrarPainel('painel-foruns')">Gerenciar fóruns</a></li>
+                            <li><a href="#">Registro do moderador</a></li>
+                        </ul>
+
+                        <!-- Menu da aba FÓRUNS (escondido por padrão) -->
+                        <ul id="menu-foruns" class="menu-lateral" style="display: none;">
+                            <li><a href="#" onclick="mostrarPainel('painel-foruns')">Gerenciar fóruns</a></li>
+                            <li><a href="#">Fóruns de poda</a></li>
+                            <li><a href="#">Permissões baseadas em fórum</a></li>
+                            <li><a href="#">Permissões do fórum</a></li>
+                            <li><a href="#">Copiar permissões do fórum</a></li>
+                            <li><a href="#">Moderadores do fórum</a></li>
+                            <li><a href="#">Permissões do fórum do usuário</a></li>
+                            <li><a href="#">Permissões do fórum do grupo</a></li>
+                        </ul>
+
+                        <!-- Você pode adicionar outros menus depois: menu-posts, menu-categorias, etc -->
+                    </div>
 
                 <!-- Painel principal -->
                 <div id="conteudo-geral" class="bloco-conteudo ativo">
@@ -100,21 +117,140 @@
                     <p>Nenhum usuário inativo no momento.</p>
                 </div>
 
-                <!-- Painel de Administração de Usuários (inicialmente escondido) -->
-                <div id="painel-usuarios" class="painel-acp" style="display: none;">
-                    <h2>Administração de usuários</h2>
-                    <p>Aqui você pode alterar as informações dos usuários e certas opções específicas.</p>
+                <!-- ✅ PAINEL QUE VAI SUBSTITUIR O CONTEÚDO AO CLICAR -->
+                    <div id="painel-usuarios" class="painel-acp acp-main-panel" style="display: none;">
+                    <!--<div id="painel-usuarios" class="painel-acp" style="display: none;">-->
+                        <h2>Administração de usuários</h2>
+                        <p>Aqui você pode alterar as informações dos usuários e certas opções específicas.</p>
 
-                    <h3>Selecione o usuário</h3>
-                    <label>Digite o nome de usuário:</label><br>
-                    <input type="text" placeholder="Nome do usuário"><br><br>
+                        <h3>Selecione o usuário</h3>
+                        <label>Digite o nome de usuário:</label>
+                        <div style="margin-top: 5px; margin-bottom: 10px;">
+                            <input type="text" placeholder="Digite um nome..." style="padding: 5px; width: 60%;">
+                            <a href="#" style="margin-left: 10px; color: #00aaff;">[ Encontre um membro ]</a>
+                        </div>
 
-                    <a href="#">[ Encontre um membro ]</a><br><br>
+                        <label>
+                            <input type="checkbox"> Selecione um usuário anônimo
+                        </label>
+                    </div> <!-- ✅ FIM DO painel-usuarios -->
 
-                    <label><input type="checkbox"> Selecione um usuário anônimo</label><br><br>
+                    <div id="painel-grupos" class="painel-acp acp-main-panel" style="display: none;">
+                        <h2>Gerenciar grupos</h2>
+                        <p>Neste painel, você pode administrar todos os seus grupos de usuários. Você pode excluir, criar e editar grupos existentes, além de definir nome e descrição.</p>
 
-                    <button>Enviar</button>
-                </div>
+                        <h3>Grupos definidos pelo usuário</h3>
+                        <table class="acp-stats-table">
+                            <thead>
+                                <tr>
+                                    <th>Grupo</th>
+                                    <th>Membros</th>
+                                    <th>Pendente</th>
+                                    <th>Opções</th>
+                                    <th>Ação</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td colspan="5">Nenhum grupo criado ainda.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <div style="margin-top: 15px;">
+                            <label>Criar novo grupo:</label>
+                            <input type="text" style="padding: 4px;">
+                            <button style="margin-left: 5px;">Enviar</button>
+                        </div>
+
+                        <br><br>
+
+                        <h3>Grupos predefinidos</h3>
+                        <table class="acp-stats-table">
+                            <thead>
+                                <tr>
+                                    <th>Grupo</th>
+                                    <th>Membros</th>
+                                    <th>Pendente</th>
+                                    <th>Opções</th>
+                                    <th>Ação</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td style="color: red;">Administradores</td>
+                                    <td>1</td><td>0</td>
+                                    <td><a href="#">Configurações</a></td>
+                                    <td><a href="#">Excluir</a></td>
+                                </tr>
+                                <tr>
+                                    <td style="color: gray;">Robôs</td>
+                                    <td>49</td><td>0</td>
+                                    <td><a href="#">Configurações</a></td>
+                                    <td><a href="#">Excluir</a></td>
+                                </tr>
+                                <tr>
+                                    <td style="color: green;">Moderadores globais</td>
+                                    <td>1</td><td>0</td>
+                                    <td><a href="#">Configurações</a></td>
+                                    <td><a href="#">Excluir</a></td>
+                                </tr>
+                                <tr>
+                                    <td>Convidados</td>
+                                    <td>0</td><td>0</td>
+                                    <td><a href="#">Configurações</a></td>
+                                    <td><a href="#">Excluir</a></td>
+                                </tr>
+                                <tr>
+                                    <td>Usuários recém-registrados</td>
+                                    <td>1</td><td>0</td>
+                                    <td><a href="#">Configurações</a></td>
+                                    <td><a href="#">Excluir</a></td>
+                                </tr>
+                                <tr>
+                                    <td>Usuários registrados</td>
+                                    <td>1</td><td>0</td>
+                                    <td><a href="#">Configurações</a></td>
+                                    <td><a href="#">Excluir</a></td>
+                                </tr>
+                                <tr>
+                                    <td>Usuários registrados da COPPA</td>
+                                    <td>0</td><td>0</td>
+                                    <td><a href="#">Configurações</a></td>
+                                    <td><a href="#">Excluir</a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div id="painel-foruns" class="painel-acp acp-main-panel" style="display: none;">
+                        <div class="acp-bloco-centro">
+                            <h2>Administração do fórum</h2>
+                            <p>No phpBB3, tudo é baseado em fóruns. Uma categoria é apenas um tipo especial de fórum. Cada fórum pode ter um número ilimitado de subfóruns e você pode determinar se cada um pode receber ou não postagens (ou seja, se funciona como uma categoria antiga).</p>
+                            <p>Aqui você pode adicionar, editar, excluir, bloquear e desbloquear fóruns individuais, bem como definir certos controles adicionais. Se suas postagens e tópicos estiverem fora de sincronia, você também pode ressincronizar um fórum.</p>
+                            <p style="font-weight: bold; color: #004488;">Você precisa copiar ou definir as permissões apropriadas para fóruns recém-criados para que eles sejam exibidos.</p>
+
+                            <h3>Índice do quadro</h3>
+                            <div class="acp-categoria-forum">
+                                <img src="{% static 'portal/img/icone-categoria.png' %}" alt="Ícone" style="vertical-align: middle; margin-right: 8px;">
+                                <span>Sua primeira categoria</span>
+                            </div>
+
+                            <div class="acp-forum-controles">
+                                <label>Selecione um fórum:</label>
+                                <select>
+                                    <option>Sua primeira categoria</option>
+                                </select>
+                                <button style="margin-left: 5px;">Ir</button>
+                            </div>
+
+                            <div class="acp-forum-criar" style="margin-top: 20px;">
+                                <input type="text" placeholder="Nome do novo fórum" style="padding: 4px;">
+                                <button style="margin-left: 5px;">Criar novo fórum</button>
+                            </div>
+                        </div>
+                    </div>
+
 
             </div>
 
@@ -143,27 +279,91 @@
 </div>
 
 <script>
-function mostrarPainel(painelId) {
-    // Esconde todos os painéis dentro do #conteudo-geral (incluindo o painel geral)
-    const paineis = document.querySelectorAll('#conteudo-geral > .painel-acp, #conteudo-geral > .acp-main-panel');
-    paineis.forEach(p => p.style.display = 'none');
 
-    // Mostra o painel solicitado
-    const painelAtivo = document.getElementById(painelId);
-    if (painelAtivo) painelAtivo.style.display = 'block';
+function mostrarAba(abaId, forcarReset = false) {
+    // Esconde todas as abas
+    const abas = document.querySelectorAll('.aba-conteudo');
+    abas.forEach(aba => aba.classList.remove('active'));
+
+    // Marca a aba ativa
+    const abaAtiva = document.getElementById(abaId);
+    if (abaAtiva) abaAtiva.classList.add('active');
+
+    // Atualiza botões
+    const botoes = document.querySelectorAll('.aba-btn');
+    botoes.forEach(btn => btn.classList.remove('active'));
+
+    if (abaId === 'geral') {
+        botoes[0].classList.add('active');
+
+        // ✅ Aqui forçamos o reset mesmo se já estiver na aba
+        if (forcarReset) {
+            const paineis = document.querySelectorAll('#conteudo-geral > .painel-acp, #conteudo-geral > .acp-main-panel');
+            paineis.forEach(painel => painel.style.display = 'none');
+            const painelPrincipal = document.querySelector('#conteudo-geral > .acp-main-panel');
+            if (painelPrincipal) painelPrincipal.style.display = 'block';
+        }
+
+        mostrarMenuLateral('menu-geral');  // <<< Aqui exibe o menu correto
+    } else {
+        const btn = Array.from(botoes).find(btn => btn.onclick?.toString().includes(`mostrarAba('${abaId}')`));
+        if (btn) btn.classList.add('active');
+
+        if (abaId === 'foruns') {
+            mostrarMenuLateral('menu-foruns');  // <<< Aqui exibe o menu correto
+        }
+        // Se quiser, adicione outros menus para outras abas aqui, por exemplo:
+        // else if (abaId === 'posts') mostrarMenuLateral('menu-posts');
+    }
 }
+
+// Função para mostrar o menu lateral correto, sem alterar o que já está funcionando:
+function mostrarMenuLateral(menuId) {
+    const menus = document.querySelectorAll('.menu-lateral');
+    menus.forEach(menu => menu.style.display = 'none');
+
+    const menuAtivo = document.getElementById(menuId);
+    if (menuAtivo) menuAtivo.style.display = 'block';
+}
+
+
 
 function voltarParaGeral() {
-    // Esconde todos os painéis dentro do #conteudo-geral
-    const paineis = document.querySelectorAll('#conteudo-geral > .painel-acp, #conteudo-geral > .acp-main-panel');
-    paineis.forEach(p => p.style.display = 'none');
-
-    // Mostra o painel geral
-    const painelGeral = document.querySelector('#conteudo-geral > .acp-main-panel');
-    if (painelGeral) painelGeral.style.display = 'block';
+    mostrarAba('geral');
 }
-</script>
 
+function mostrarPainel(painelId) {
+    // Esconde todos os painéis
+    const paineis = document.querySelectorAll('#conteudo-geral > .painel-acp, #conteudo-geral > .acp-main-panel');
+    paineis.forEach(painel => painel.style.display = 'none');
+
+    // Mostra o painel desejado
+    const painelAtivo = document.getElementById(painelId);
+    if (painelAtivo) painelAtivo.style.display = 'block';
+
+    // === NOVO: Atualiza visual dos botões ===
+    const botoes = document.querySelectorAll('.aba-btn');
+    botoes.forEach(btn => btn.classList.remove('active'));
+
+    const botaoAtivo = Array.from(botoes).find(btn =>
+        btn.getAttribute('onclick')?.includes(`mostrarPainel('${painelId}')`)
+    );
+    if (botaoAtivo) botaoAtivo.classList.add('active');
+}
+
+
+function resetarAbaGeral() {
+    mostrarAba('geral');
+
+    const paineis = document.querySelectorAll('#conteudo-geral > .painel-acp, #conteudo-geral > .acp-main-panel');
+    paineis.forEach(painel => painel.style.display = 'none');
+
+    const painelPrincipal = document.querySelector('#conteudo-geral > .acp-main-panel');
+    if (painelPrincipal) painelPrincipal.style.display = 'block';
+}
+
+
+</script>
 
 
 {% endblock %}

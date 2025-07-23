@@ -816,3 +816,20 @@ a.btn-padronizado:hover {
     background-color: #005eff;
 }
 
+.acp-categoria-forum {
+    background-color: #1e1e1e;
+    border: 1px solid #333;
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 10px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+}
+
+.acp-forum-controles select {
+    padding: 4px;
+    background-color: #2a2a2a;
+    border: 1px solid #555;
+    color: white;
+}
